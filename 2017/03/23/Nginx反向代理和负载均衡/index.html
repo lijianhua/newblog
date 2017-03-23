@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Li Jianhua,maillijianhua@gmail.com"><title>Nginx反向代理和负载均衡 · 空</title><meta name="description" content="正向代理
+
+明确知道要访问的网站
+A服务器可以访问C，访客可以访问服务器A，不可以访问服务器C，A为代理服务器
+
+
+反向代理
+
+不知道所访问真实服务器
+访客可以访问服务器A，服务器A无数据，服务器A从其他服务器中读取数据并且返回给访客
+
+
+负载均衡
+服务器压力过大会使服务器崩溃,通过负载均衡来分担服"><meta name="keywords" content="Hexo,HTML,Li Jianhua,CSS,PHP,NGINX,Linux,MYSQL"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><link rel="apple-touch-icon" sizes="57x57" href="/images/favicon/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/images/favicon/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/images/favicon/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/images/favicon/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/images/favicon/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/images/favicon/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/images/favicon/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="/images/favicon/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="/images/favicon/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png"><link rel="manifest" href="/images/favicon/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="/images/favicon/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><h3 title=""><a href="/">空</a></h3><div class="description"><p>Nothing lasts forever.</p></div></div></div><ul class="social-links"><li><a href="https://github.com/lijianhua"><i class="fa fa-github"></i></a></li><li><a href="/atom.xml"><i class="fa fa-rss"></i></a></li></ul><div class="footer"><a target="_blank" href="/"><span>©2017- Li Jianhua</span></a><div class="by_farbox"><a href="https://hexo.io" target="_blank">Hexo</a></div><div class="by_farbox"><a href="http://www.miitbeian.gov.cn/" target="_blank">黑ICP备15002574号-1</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首页</a></li><li><a href="/archives">归档</a></li></div><div class="information"><div class="back_btn"><li><a onclick="window.history.go(-1)" class="fa fa-chevron-left"> </a></li></div><div class="avatar"><img src="https://secure.gravatar.com/avatar/7992114d3fb9bebb3271d4cf53829c0c?s=64"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>Nginx反向代理和负载均衡</a></h3></div><div class="post-content"><ul>
+<li><p>正向代理</p>
+<ul>
+<li>明确知道要访问的网站</li>
+<li>A服务器可以访问C，访客可以访问服务器A，不可以访问服务器C，A为代理服务器</li>
+</ul>
+</li>
+<li><p>反向代理</p>
+<ul>
+<li>不知道所访问真实服务器</li>
+<li>访客可以访问服务器A，服务器A无数据，服务器A从其他服务器中读取数据并且返回给访客</li>
+</ul>
+</li>
+<li><p>负载均衡</p>
+<p><code>服务器压力过大会使服务器崩溃,通过负载均衡来分担服务器压力，通过反向代理来实现的</code></p>
+</li>
+<li><p>Nginx 负载均衡的实现</p>
+<ul>
+<li>Nginx可以通过反向代理实现负载均衡，用户的访问首先会访问到Nginx服务器，然后Nginx选择压力较小的服务器，并且访问的是未崩溃的服务器。</li>
+<li>upstream name 配置代理服务器</li>
+</ul>
+</li>
+<li><p>HTTP Upstream 模块</p>
+<ul>
+<li>Upstream 模块是Nginx服务器的一个重要模块，Upstream模块实现在轮询和客户端IP之间实现后端的负载均衡</li>
+<li>常用指令ip_hash, server, Upstream</li>
+<li>ip_hash：在负载均衡系统中，假如用户在某台服务器上登录，那么如果该用户第二次请求时候，因为负载均衡系统，每次请求都会重新定位到一个新服务器，显然不可以，可以采用Ip_hash指令解决这个问题，第二次请求会通过哈希算法自动定位到第一次登录的服务器。</li>
+<li>server：server指令主要用于指定服务器的名称和参数，通过参数设置不同服务器的权重</li>
+<li>upstream：主要是用于设置一组可以在proxy_pass和fastcgi_pass指令中使用代理服务器，默认负载均衡方式为轮询</li>
+</ul>
+</li>
+<li><p>其他负载均衡的方法</p>
+<ul>
+<li>除了使用Nginx服务器实现外，还有很多方式，软件实现和硬件实现，软件分服务器软件、系统软件、应用软件，根据反向代理的中间相关。</li>
+</ul>
+</li>
+<li><p>负载均衡实现小结</p>
+<ul>
+<li><p>硬件实现负载均衡：效率高，成本高</p>
+</li>
+<li><p>软件实现负载均衡：效率相对低，成本低（nginx）</p>
+<p>​</p>
+</li>
+</ul>
+</li>
+</ul>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2017-03-23</span><i class="fa fa-comment-o"></i><a href="/2017/03/23/Nginx反向代理和负载均衡/#comments">评论</a><i class="fa fa-tag"></i><a href="/tags/Nginx-反向代理，负载均衡/" title="Nginx, 反向代理，负载均衡" class="tag">Nginx, 反向代理，负载均衡 </a></div></div></div></div><div class="share"><div class="evernote"> <a href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank" class="fa fa-bookmark"></a></div><div class="weibo"> <a href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));" class="fa fa-weibo"></a></div><div class="twitter"> <a href="http://twitter.com/home?status=,http://ljh.name/2017/03/23/Nginx反向代理和负载均衡/,空,Nginx反向代理和负载均衡,;" class="fa fa-twitter"></a></div></div><div class="pagination"><ul class="clearfix"><li class="next pagbuttons"><a role="navigation" href="/2017/03/21/从零开始搭建HEXO/" title="从零开始搭建HEXO" class="btn">下一篇</a></li></ul></div><a id="comments"></a><div data-thread-key="2017/03/23/Nginx反向代理和负载均衡/" data-title="Nginx反向代理和负载均衡" data-url="http://ljh.name/2017/03/23/Nginx反向代理和负载均衡/" data-author-key="1" class="ds-thread"></div><script>var duoshuoQuery = {short_name:"seansun"};
+(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+
+</script></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>
