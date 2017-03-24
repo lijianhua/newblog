@@ -1,16 +1,1010 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Li Jianhua,maillijianhua@gmail.com"><title>空</title><meta name="description" content="A Blog Powered By Hexo"><meta name="keywords" content="Hexo,HTML,Li Jianhua,CSS,PHP,NGINX,Linux,MYSQL"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><link rel="apple-touch-icon" sizes="57x57" href="/images/favicon/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/images/favicon/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/images/favicon/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/images/favicon/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/images/favicon/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/images/favicon/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/images/favicon/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="/images/favicon/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="/images/favicon/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png"><link rel="manifest" href="/images/favicon/manifest.json"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="/images/favicon/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><h3 title=""><a href="/">空</a></h3><div class="description"><p>Nothing lasts forever.</p></div></div></div><ul class="social-links"><li><a href="https://github.com/lijianhua"><i class="fa fa-github"></i></a></li><li><a href="/atom.xml"><i class="fa fa-rss"></i></a></li></ul><div class="footer"><a target="_blank" href="/"><span>©2017- Li Jianhua</span></a><div class="by_farbox"><a href="https://hexo.io" target="_blank">Hexo</a></div><div class="by_farbox"><a href="http://www.miitbeian.gov.cn/" target="_blank">黑ICP备15002574号-1</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/" class="current">首页</a></li><li><a href="/archives">归档</a></li></div><div class="information"><div class="back_btn"><li><a onclick="window.history.go(-1)" style="display:none;" class="fa fa-chevron-left"> </a></li></div><div class="avatar"><img src="https://secure.gravatar.com/avatar/7992114d3fb9bebb3271d4cf53829c0c?s=64"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2017/03/23/Nginx反向代理和负载均衡/">Nginx反向代理和负载均衡</a></h3></div><div class="post-content"><p>
-正向代理
-
-明确知道要访问的网站
-A服务器可以访问C，访客可以访问服务器A，不可以访问服务器C，A为代理服务器
+<!doctype html>
 
 
-反向代理
 
-不知道所访问真实服务器
-访客可以访问服务器A，服务器A无数据，服务器A从其他服务器中读取数据并且返回给访客
+  
 
 
-负载均衡
-服务器压力过大会使服务器崩溃,通过负载均衡来分担服务器压力，通...</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2017-03-23</span><i class="fa fa-comment-o"></i><a href="/2017/03/23/Nginx反向代理和负载均衡/#comments">评论</a><i class="fa fa-tag"></i><a href="/tags/Nginx-反向代理，负载均衡/" title="Nginx, 反向代理，负载均衡" class="tag">Nginx, 反向代理，负载均衡 </a></div></div></div></div><div class="post animated fadeInDown"><div class="post-title"><h3><a href="/2017/03/21/从零开始搭建HEXO/">从零开始搭建HEXO</a></h3></div><div class="post-content"><p>起因一直有搭建个人博客的想法，并几次都付诸行动，以前用过Wordpress, Typecho，最后都因为各种原因下线或者放弃了，其中各种插件的以及部署问题已经忙的焦头烂额，最近又一次燃起了搭建个人博客的想法，通过各种产品之间的比较，最后我选中了Hexo，选中它的最大原因是因为不需要数据库，而且对环境要求较少。
-正...</p></div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2017-03-21</span><i class="fa fa-comment-o"></i><a href="/2017/03/21/从零开始搭建HEXO/#comments">评论</a><i class="fa fa-tag"></i><a href="/tags/Hexo-github-wordpress-typecho-blog/" title="Hexo, github, wordpress, typecho, blog" class="tag">Hexo, github, wordpress, typecho, blog </a></div></div></div></div><div class="pagination"><ul class="clearfix"></ul></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="空" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="空">
+<meta property="og:url" content="http://ljh.name/index.html">
+<meta property="og:site_name" content="空">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="空">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://ljh.name/"/>
+
+
+
+
+
+  <title> 空 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?fd667ce7bb816543fe7c8073a4b381ba";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+   page-home 
+ ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">空</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://ljh.name/2017/03/23/Nginx反向代理和负载均衡/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Li Jianhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://secure.gravatar.com/avatar/7992114d3fb9bebb3271d4cf53829c0c?s=64">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="空">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/23/Nginx反向代理和负载均衡/" itemprop="url">
+                  Nginx反向代理和负载均衡
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-23T18:03:29+08:00">
+                2017-03-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/03/23/Nginx反向代理和负载均衡/" class="leancloud_visitors" data-flag-title="Nginx反向代理和负载均衡">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li><p>正向代理</p>
+<ul>
+<li>明确知道要访问的网站</li>
+<li>A服务器可以访问C，访客可以访问服务器A，不可以访问服务器C，A为代理服务器</li>
+</ul>
+</li>
+<li><p>反向代理</p>
+<ul>
+<li>不知道所访问真实服务器</li>
+<li>访客可以访问服务器A，服务器A无数据，服务器A从其他服务器中读取数据并且返回给访客</li>
+</ul>
+</li>
+<li><p>负载均衡</p>
+<p><code>服务器压力过大会使服务器崩溃,通过负载均衡来分担服务器压力，通过反向代理来实现的</code></p>
+</li>
+<li><p>Nginx 负载均衡的实现</p>
+<ul>
+<li>Nginx可以通过反向代理实现负载均衡，用户的访问首先会访问到Nginx服务器，然后Nginx选择压力较小的服务器，并且访问的是未崩溃的服务器。</li>
+<li>upstream name 配置代理服务器</li>
+</ul>
+</li>
+<li><p>HTTP Upstream 模块</p>
+<ul>
+<li>Upstream 模块是Nginx服务器的一个重要模块，Upstream模块实现在轮询和客户端IP之间实现后端的负载均衡</li>
+<li>常用指令ip_hash, server, Upstream</li>
+<li>ip_hash：在负载均衡系统中，假如用户在某台服务器上登录，那么如果该用户第二次请求时候，因为负载均衡系统，每次请求都会重新定位到一个新服务器，显然不可以，可以采用Ip_hash指令解决这个问题，第二次请求会通过哈希算法自动定位到第一次登录的服务器。</li>
+<li>server：server指令主要用于指定服务器的名称和参数，通过参数设置不同服务器的权重</li>
+<li>upstream：主要是用于设置一组可以在proxy_pass和fastcgi_pass指令中使用代理服务器，默认负载均衡方式为轮询</li>
+</ul>
+</li>
+<li><p>其他负载均衡的方法</p>
+<ul>
+<li>除了使用Nginx服务器实现外，还有很多方式，软件实现和硬件实现，软件分服务器软件、系统软件、应用软件，根据反向代理的中间相关。</li>
+</ul>
+</li>
+<li><p>负载均衡实现小结</p>
+<ul>
+<li><p>硬件实现负载均衡：效率高，成本高</p>
+</li>
+<li><p>软件实现负载均衡：效率相对低，成本低（nginx）</p>
+<p>​</p>
+</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://ljh.name/2017/03/21/从零开始搭建HEXO/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Li Jianhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://secure.gravatar.com/avatar/7992114d3fb9bebb3271d4cf53829c0c?s=64">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="空">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/21/从零开始搭建HEXO/" itemprop="url">
+                  从零开始搭建HEXO
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-21T10:54:50+08:00">
+                2017-03-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/03/21/从零开始搭建HEXO/" class="leancloud_visitors" data-flag-title="从零开始搭建HEXO">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>一直有搭建个人博客的想法，并几次都付诸行动，以前用过<a href="https://wordpress.com/" target="_blank" rel="external">Wordpress</a>, <a href="http://typecho.org" target="_blank" rel="external">Typecho</a>，最后都因为各种原因下线或者放弃了，其中各种插件的以及部署问题已经忙的焦头烂额，最近又一次燃起了搭建个人博客的想法，通过各种产品之间的比较，最后我选中了<a href="https://hexo.io" target="_blank" rel="external">Hexo</a>，选中它的最大原因是因为不需要数据库，而且对环境要求较少。</p>
+<h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><p>我使用Mac系统，安装Hexo时候的版本是hexo: 3.2.2，其他系统替换相应命令即可。</p>
+<h4 id="安装前准备"><a href="#安装前准备" class="headerlink" title="安装前准备"></a>安装前准备</h4><p>虽然Hexo对环境要求较少，但是安装前还是需要一些准备的</p>
+<ul>
+<li>Node.js<ul>
+<li>Windows：<a href="https://nodejs.org/" target="_blank" rel="external">nodejs</a>官网安装</li>
+<li>Mac：brew install node</li>
+<li>Linux：curl <a href="https://raw.github.com/creationix/nvm/master/install.sh" target="_blank" rel="external">https://raw.github.com/creationix/nvm/master/install.sh</a> | sh</li>
+</ul>
+</li>
+<li>Git<ul>
+<li>Windows：下载安装  <a href="https://git-scm.com/download/win" target="_blank" rel="external">git</a></li>
+<li>Mac： brew install git</li>
+<li>Linux：sudo apt-get install git</li>
+</ul>
+</li>
+<li>Github：如果有就忽略，没有去注册个<a href="https://www.github.com" target="_blank" rel="external">github</a></li>
+</ul>
+<h4 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h4><p>前面的准备完成就开始正式安装Hexo，在终端输入如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g hexo-cli</div></pre></td></tr></table></figure>
+<p>安装完成输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hexo -v</div><div class="line">hexo: 3.2.2</div></pre></td></tr></table></figure>
+<p>出现hexo版本就安装成功了。</p>
+<h4 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h4><p>输入如下命令，<folder> 项目目录名称：</folder></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ hexo init &lt;folder&gt;</div><div class="line">$ <span class="built_in">cd</span> &lt;folder&gt;</div><div class="line">$ npm install</div></pre></td></tr></table></figure>
+<p>生成静态文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo g <span class="comment"># 或者hexo generate</span></div></pre></td></tr></table></figure>
+<p>启动本地web服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo s <span class="comment"># 或者hexo server</span></div></pre></td></tr></table></figure>
+<p>在浏览器访问<a href="http://localhost:4000，就可以看到博客了" target="_blank" rel="external">http://localhost:4000，就可以看到博客了</a></p>
+<p>常用命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"postName"</span> <span class="comment">#新建文章</span></div><div class="line">$ hexo new page <span class="string">"pageName"</span> <span class="comment">#新建页面 例如about /source/about/index.md</span></div></pre></td></tr></table></figure>
+<h4 id="Hexo-主题安装"><a href="#Hexo-主题安装" class="headerlink" title="Hexo 主题安装"></a>Hexo 主题安装</h4><p>我使用的是<a href="https://github.com/Ben02/hexo-theme-Anatole" target="_blank" rel="external">Anatole</a>这个主题，更多主题可以在<a href="https://hexo.io/themes/" target="_blank" rel="external">官网主题</a>选择，以下是主题安装方式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> &lt;folder&gt;</div><div class="line">$ git <span class="built_in">clone</span> https://github.com/Ben02/hexo-theme-Anatole theme/anatole</div></pre></td></tr></table></figure>
+<p>启用主题</p>
+<p>在根目录的_config.yml配置中的theme属性，将其设置为anatole，主题所有的配置在<code>:</code>后都要有一个空格</p>
+<p>更新主题</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> theme/anatole</div><div class="line">$ git pull</div><div class="line">$ hexo g <span class="comment">#生成静态</span></div><div class="line">$ hexo s <span class="comment">#启动本地web服务</span></div></pre></td></tr></table></figure>
+<p>访问<a href="http://localhost:4000，就可以看见新的主题了" target="_blank" rel="external">http://localhost:4000，就可以看见新的主题了</a></p>
+<h4 id="Github-Pages-设置"><a href="#Github-Pages-设置" class="headerlink" title="Github Pages 设置"></a>Github Pages 设置</h4><p><a href="https://pages.github.com/" target="_blank" rel="external">GitHub Pages</a> 本用于介绍托管在GitHub的项目，不过，由于他的空间免费稳定，可以用来用来做搭建一个博客</p>
+<p>每个帐号只能有一个仓库来存放个人主页，而且仓库的名字必须是username/username.github.io，这是特殊的命名约定。你可以通过<a href="http://username.github.io/" target="_blank" rel="external">http://username.github.io</a> 来访问你的个人主页。</p>
+<p>这里特别提醒一下，需要注意的个人主页的网站内容是在master分支下的，而且只能在master分支。</p>
+<p>申请方式可以建立其他的仓库一样，只要把以<a href="http://username.github.io来命名就可以了（username" target="_blank" rel="external">http://username.github.io来命名就可以了（username</a> 即你的账户名）。</p>
+<p>下面就开始部署本地的博客到github：</p>
+<ul>
+<li><p>打开根目录的_config.yml，文件找到Deployment，配置如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:                                                                              </div><div class="line">  <span class="built_in">type</span>: git                                                                                                                                                 </div><div class="line">  repo: https://github.com/username/username.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure>
+</li>
+<li><p>保存后执行如下命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-deployer-git --save <span class="comment"># 部署到远程需要安装的包</span></div><div class="line">$ hexo clean</div><div class="line">$ hexo generate</div><div class="line">$ hexo deploy <span class="comment"># Hexo部署到远程</span></div></pre></td></tr></table></figure>
+<p>这时查看代码库就可以看到代码已经在github上了，访问<a href="http://username.github.io" target="_blank" rel="external">http://username.github.io</a>   就可以看到你的博客了</p>
+</li>
+</ul>
+<h4 id="如何用自己的域名来访问博客"><a href="#如何用自己的域名来访问博客" class="headerlink" title="如何用自己的域名来访问博客"></a>如何用自己的域名来访问博客</h4><p>在source目录下添加CNAME文件，操作步骤如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> <span class="built_in">source</span>/</div><div class="line">$ vim CNAME <span class="comment"># 输入你的域名在CNAME文件下</span></div><div class="line">$ hexo clean <span class="comment"># 返回根目录执行</span></div><div class="line">$ hexo generate</div><div class="line">$ hexo deploy <span class="comment"># Hexo部署到远程</span></div></pre></td></tr></table></figure>
+<p>添加解析</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">记录类型 	主机记录 	解析线路(运营商) 	记录值	</div><div class="line">CNAME	     www	       默认	username.github.io</div></pre></td></tr></table></figure>
+<p>如果不生效添加</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">记录类型 	主机记录 	解析线路(运营商) 	记录值	</div><div class="line">	A	     @	       默认	        192.30.252.154</div><div class="line">	A	     @	       默认	        192.30.252.153</div></pre></td></tr></table></figure>
+<p>访问你的域名就可以看到你的博客了。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+  </section>
+
+  
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://secure.gravatar.com/avatar/7992114d3fb9bebb3271d4cf53829c0c?s=64"
+               alt="Li Jianhua" />
+          <p class="site-author-name" itemprop="name">Li Jianhua</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Li Jianhua</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("FyKqp1B2nTTuaAilfn5onXYx-gzGzoHsz", "wsk4RjWPraU2ATB9PVdo9XoY");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
