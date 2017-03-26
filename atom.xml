@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ljh.name/"/>
-  <updated>2017-03-24T07:07:41.000Z</updated>
+  <updated>2017-03-26T14:37:45.000Z</updated>
   <id>http://ljh.name/</id>
   
   <author>
@@ -14,6 +14,168 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>开源实时日志分析ELK平台实践</title>
+    <link href="http://ljh.name/2017/03/26/%E5%BC%80%E6%BA%90%E5%AE%9E%E6%97%B6%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90ELK%E5%B9%B3%E5%8F%B0%E5%AE%9E%E8%B7%B5/"/>
+    <id>http://ljh.name/2017/03/26/开源实时日志分析ELK平台实践/</id>
+    <published>2017-03-26T14:14:14.000Z</published>
+    <updated>2017-03-26T14:37:45.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>周末参加活动看见别人分享的<a href="https://leo108.com/pid-2256.asp" target="_blank" rel="external">MONOLOG优化及打造ELK友好的日志格式</a> ，会后了解了下ELK，看见网上最新的资料比较少，大多是过去的版本，不同版本的配置有些许区别，所以花了一点时间学习了下，记录下来分享一下，希望对你有用，话不多说，下面开始。</p>
+<h4 id="ELK是什么？"><a href="#ELK是什么？" class="headerlink" title="ELK是什么？"></a>ELK是什么？</h4><blockquote>
+<p>ELK由ElasticSearch、Logstash和Kiabana三个开源工具组成，作用是集中化管理日志，而且对于日志的统计、检索、排序等操作有很好的支持</p>
+</blockquote>
+<h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><blockquote>
+<p>ELK 官方网址 <a href="https://www.elastic.co/products" target="_blank" rel="external">https://www.elastic.co/products</a></p>
+</blockquote>
+<ul>
+<li>Elasticsearch是个开源分布式搜索引擎，它的特点有：分布式，零配置，自动发现，索引自动分片，索引副本机制，restful风格接口，多数据源，自动搜索负载等。</li>
+<li>Logstash是一个完全开源的工具，他可以对你的日志进行收集、分析，并将其存储供以后使用（如，搜索)。</li>
+<li>Kibana 也是一个开源和免费的工具，他Kibana可以为 Logstash 和 ElasticSearch 提供的日志分析友好的 Web 界面，可以帮助您汇总、分析和搜索重要数据日志。</li>
+</ul>
+<h4 id="为什么用ELK"><a href="#为什么用ELK" class="headerlink" title="为什么用ELK?"></a>为什么用ELK?</h4><p>日志主要包括系统日志、应用程序日志和安全日志。系统运维和开发人员可以通过日志了解服务器软硬件信息、检查配置过程中的错误及错误发生的原因。经常分析日志可以了解服务器的负荷，性能安全性，从而及时采取措施纠正错误。</p>
+<p>通常，日志被分散的储存不同的设备上。如果你管理数十上百台服务器，你还在使用依次登录每台机器的传统方法查阅日志。这样是不是感觉很繁琐和效率低下。当务之急我们使用集中化的日志管理，例如：开源的syslog，将所有服务器上的日志收集汇总。</p>
+<p>集中化管理日志后，日志的统计和检索又成为一件比较麻烦的事情，一般我们使用grep、awk和wc等Linux命令能实现检索和统计，但是对于要求更高的查询、排序和统计等要求和庞大的机器数量依然使用这样的方法难免有点力不从心。ELK完美的解决了如上问题，因此它是开发人员和运维人员不错的选择。<a href="http://baidu.blog.51cto.com/71938/1676798" target="_blank" rel="external">以上内容来源网络</a></p>
+<h4 id="ELK安装和配置"><a href="#ELK安装和配置" class="headerlink" title="ELK安装和配置"></a>ELK安装和配置</h4><h5 id="系统环境"><a href="#系统环境" class="headerlink" title="系统环境"></a>系统环境</h5><p>System：OS X EI Capitan (版本10.11.6)</p>
+<p>ElasticSearch: 5.2.2</p>
+<p>Logstash: 5.2.2</p>
+<p>Kibana: 5.2.2</p>
+<p>Java：java version “1.8.0_121”</p>
+<blockquote>
+<p>由于Logstash的运行依赖于Java环境， 推荐使用最新版本的Java。因为我们只需要Java的运行环境，所以可以只安装JRE，不过这里我依然使用JDK。</p>
+<p>建议使用同一时期最细版本的ELK</p>
+</blockquote>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><ul>
+<li><p>Java jdk</p>
+<ul>
+<li><p>地址：<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="external">JDK</a></p>
+</li>
+<li><p>选择Accept License Agreement，选择你系统对应版本，这里我选择<a href="http://www.oracle.com/technetwork/java/javase/downloads/javascript: void(0" target="_blank" rel="external">jdk-8u121-macosx-x64.dmg</a>) 傻瓜版</p>
+<blockquote>
+<p>可能遇见问题，点击安装后一直显示正在验证，重启解决</p>
+</blockquote>
+</li>
+<li><p>安装成功后，环境变量设置</p>
+<ul>
+<li><p>JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home     </p>
+</li>
+<li><p>PATH=$JAVA_HOME/bin:$PATH  </p>
+</li>
+<li><p>CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</p>
+</li>
+<li><p>export    JAVA_HOME, PATH, CLASSPATH</p>
+<blockquote>
+<p>把环境变量加入你用的shell，我的的zsh，例如vim .zshrc                                   </p>
+</blockquote>
+</li>
+<li><p>接下来验证JAVA是否安装成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ java -version</div><div class="line">java version <span class="string">"1.8.0_121"</span></div><div class="line">Java(TM) SE Runtime Environment (build 1.8.0_121-b13)</div><div class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.121-b13, mixed mode)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Logstash </p>
+<ul>
+<li><p>地址：<a href="https://www.elastic.co/downloads，" target="_blank" rel="external">https://www.elastic.co/downloads，</a> 我们可以看到ELK三个产品</p>
+</li>
+<li><p>点击 Download，选择你系统对应的文件下载，这里我选择的tar.gz</p>
+</li>
+<li><p>下载完成后解压到你指定的目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ tar -zxf logstash-5.2.2.tar -C /usr/<span class="built_in">local</span>/</div><div class="line">$ /usr/<span class="built_in">local</span>/logstash-5.2.2/bin/logstash <span class="_">-e</span> <span class="string">"input &#123;stdin&#123;&#125;&#125; output &#123;stdout&#123;&#125;&#125;"</span> <span class="comment">#通过-e参数指定logstash的配置信息，用于快速测试，直接输出到屏幕</span></div><div class="line">Sending Logstash<span class="string">'s logs to /usr/local/logstash-5.2.2/logs which is now configured via log4j2.properties</span></div><div class="line">[2017-03-26T21:09:36,336][INFO ][logstash.pipeline        ] Starting pipeline &#123;"id"=&gt;"main", "pipeline.workers"=&gt;4, "pipeline.batch.size"=&gt;125, "pipeline.batch.delay"=&gt;5, "pipeline.max_inflight"=&gt;500&#125;</div><div class="line">[2017-03-26T21:09:36,371][INFO ][logstash.pipeline        ] Pipeline main started</div><div class="line">The stdin plugin is now waiting for input:</div><div class="line">[2017-03-26T21:09:36,512][INFO ][logstash.agent           ] Successfully started Logstash API endpoint &#123;:port=&gt;9600&#125;</div><div class="line">my name is lijianhua # 手动输入回车等待几秒返回结果</div><div class="line">2017-03-26T13:09:49.174Z Gubler.lan my name is lijianhua</div></pre></td></tr></table></figure>
+<blockquote>
+<p>以上logstash 安装成功了</p>
+</blockquote>
+</li>
+<li><p>logstash有两个常用的参数</p>
+<ul>
+<li>-e :指定logstash的配置信息，可以用于快速测试</li>
+<li>-f :指定logstash的配置文件；可以用于生产环境</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Elasticsearch</p>
+<ul>
+<li><p>点击 Download，选择你系统对应的文件下载，这里我选择的tar</p>
+</li>
+<li><p>下载完成后解压到你指定的目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ tar -zxf elasticsearch-5.2.2.tar -C /usr/<span class="built_in">local</span>/</div><div class="line">$ vim /usr/<span class="built_in">local</span>/elasticsearch-1.7.2/config/elasticsearch.yml <span class="comment"># 修改配置信息，去掉'#'号</span></div><div class="line">cluster.name=elasticsearch</div><div class="line">配置的集群名称，默认是elasticsearch，es服务会通过广播方式自动连接在同一网段下的es服务，通过多播方式进行通信，同一网段下可以有多个集群，通过集群名称这个属性来区分不同的集群。</div><div class="line">node.name=node0</div><div class="line">当前配置所在机器的节点名，你不设置就默认随机指定一个name列表中名字，该name列表在es的jar包中config文件夹里name.txt文件中，其中有很多作者添加的有趣名字</div><div class="line">network.port=9200</div><div class="line">设置对外服务的http端口，默认为9200。</div><div class="line">$ /usr/<span class="built_in">local</span>/elasticsearch-5.2.2/bin/elasticsearch</div></pre></td></tr></table></figure>
+<blockquote>
+<p><a href="http://www.cnblogs.com/hanyouchun/p/5163183.html" target="_blank" rel="external">更多配置信息参考</a> </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">浏览器输入：http://localhost:9200，输出如下信息：</div><div class="line">&#123;</div><div class="line">  &quot;name&quot; : &quot;node-1&quot;,</div><div class="line">  &quot;cluster_name&quot; : &quot;test-elasticsearch&quot;,</div><div class="line">  &quot;cluster_uuid&quot; : &quot;kimjdc71S6W54DXaB3Fl0A&quot;,</div><div class="line">  &quot;version&quot; : &#123;</div><div class="line">    &quot;number&quot; : &quot;5.2.2&quot;,</div><div class="line">    &quot;build_hash&quot; : &quot;f9d9b74&quot;,</div><div class="line">    &quot;build_date&quot; : &quot;2017-02-24T17:26:45.835Z&quot;,</div><div class="line">    &quot;build_snapshot&quot; : false,</div><div class="line">    &quot;lucene_version&quot; : &quot;6.4.1&quot;</div><div class="line">  &#125;,</div><div class="line">  &quot;tagline&quot; : &quot;You Know, for Search&quot;</div><div class="line">&#125;</div><div class="line">安装成功</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装Elasticsearch HEAD插件</p>
+<blockquote>
+<p>elasticsearch-head是一个elasticsearch的集群管理工具，它是完全由HTML5编写的独立网页程序，你可以通过插件把它集成到ES</p>
+<p>网上安装方法很多，没几个成功的，可能是版本原因，所以我直接从Github上下一个</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">clone</span> git://github.com/mobz/elasticsearch-head.git</div><div class="line">$ <span class="built_in">cd</span> elasticsearch-head</div><div class="line">$ npm install <span class="comment"># 由于head基于nodejs</span></div><div class="line">$ grunt server</div><div class="line"><span class="comment"># 浏览器访问 http://localhost:9100/</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>这里可能遇见问题 “集群健康值: 未连接”</p>
+<p>修改elasticsearch.yml文件</p>
+<p><code># 增加如下字段</code></p>
+<p><code>http.cors.enabled: ``true</code></p>
+<p><code>http.cors.allow-origin: ``&quot;*&quot;</code></p>
+<p>重启ES和HEAD就可以了</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>Kinaba</p>
+<ul>
+<li><p>点击 Download，选择你系统对应的文件下载，这里我选择的mac，下载完是.tar文件</p>
+</li>
+<li><p>下载完成后解压到你指定的目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ tar -zxf kibana-5.2.2-darwin-x86_64.tar -C /usr/<span class="built_in">local</span>/</div><div class="line">$ /usr/<span class="built_in">local</span>/kibana-5.2.2-darwin-x86_64/bin/kibana</div><div class="line">浏览器访问http://localhost:5601/ 就可以查看安装成功了</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><blockquote>
+<p>先在我们ELK都安装完了，接下来是如何关联在一起了</p>
+</blockquote>
+<ul>
+<li><p>Logstash 配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/logstash-5.2.2/config</div><div class="line">$ vim elasticsearche.conf <span class="comment">#新建配置文件</span></div><div class="line">$ cat elasticsearche.conf</div><div class="line">input &#123;</div><div class="line">  file &#123;</div><div class="line">        path =&gt; <span class="string">"/myapp/storage/logs/lumen.log"</span> <span class="comment"># 日志文件目录</span></div><div class="line">        start_position =&gt; <span class="string">"beginning"</span> <span class="comment">#从文件开始处读写</span></div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line">filter &#123;</div><div class="line">  <span class="comment">#定义数据的格式</span></div><div class="line">  grok &#123;</div><div class="line">    match =&gt; &#123; <span class="string">"message"</span> =&gt;</div><div class="line"><span class="string">"%&#123;DATA:timestamp&#125;\|%&#123;IP:serverIp&#125;\|%&#123;IP:clientIp&#125;\|%&#123;DATA:logSource&#125;\|%&#123;DATA:userId&#125;\|%&#123;DATA:reqUrl&#125;\|%&#123;DATA:reqUri&#125;\|%&#123;DATA:refer&#125;\|%&#123;DATA:device&#125;\|%&#123;DATA:textDuring&#125;\|%&#123;DATA:duringTime:int&#125;\|\|"</span> &#125;</div><div class="line">	// 对应的日志格式为</div><div class="line">	/**</div><div class="line">	2015-05-07-16:03:04|10.4.29.158|120.131.74.116|WEB|11299073|http://quxue.renren.com/shareApp?isappinstalled=0&amp;userId=11299073&amp;from=groupmessage|/shareApp|null|Mozilla/5.0 (iPhone; CPU iPhone OS 8_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Mobile/12D508 MicroMessenger/6.1.5 NetType/WIFI|duringTime|98||</div><div class="line">	*/</div><div class="line">  </div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">output &#123;</div><div class="line">  <span class="comment">#将输出保存到elasticsearch，如果没有匹配到时间就不保存，因为日志里的网址参数有些带有换行, 注意网上有的配置写的是host，总会报错，查了下在某一版本改成了hosts</span></div><div class="line">  <span class="keyword">if</span> [timestamp] =~ /^\d&#123;4&#125;-\d&#123;2&#125;-\d&#123;2&#125;/ &#123;</div><div class="line">        elasticsearch &#123; hosts =&gt; localhost&#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>定义数据格式很重要，不然会匹配不出你的日志至于如何写，参考<a href="https://github.com/elastic/logstash/blob/v1.4.2/patterns/grok-patterns" target="_blank" rel="external">elastic/logstash</a> 这个是定义好的</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ /usr/<span class="built_in">local</span>/logstash-5.2.2/bin/logstash <span class="_">-f</span> /usr/<span class="built_in">local</span>/logstash-5.2.2/config/elasticsearche.conf </div><div class="line"><span class="comment">#以这个配置文件运行logstash</span></div></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+<li><p>Kinaba 配置</p>
+<ul>
+<li>第一次访问kibana会重定向到设置索引的页面,如果输入logstash-*就是匹配所有的索引，还可以指定日期，logstash的索引是按日期区分的，一个日期一个文件夹</li>
+<li>create 之后点击Discover就可以查看分组的日志和实时日志。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>想要深入学习请持续关注。</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;周末参加活动看见别人分享的&lt;a href=&quot;https://leo108.com/pid-2256.asp&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;MONOLOG优化及打造ELK友好的日志格式&lt;/a&gt; ，会后了解了下ELK，看见网上最新的资料比较少，
+    
+    </summary>
+    
+      <category term="技术学习" scheme="http://ljh.name/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="ELK" scheme="http://ljh.name/tags/ELK/"/>
+    
+      <category term="ElasticSearch" scheme="http://ljh.name/tags/ElasticSearch/"/>
+    
+      <category term="Logstash" scheme="http://ljh.name/tags/Logstash/"/>
+    
+      <category term="Kiabana" scheme="http://ljh.name/tags/Kiabana/"/>
+    
+  </entry>
   
   <entry>
     <title>Docker——初探</title>
