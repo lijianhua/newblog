@@ -116,12 +116,21 @@ ELK由ElasticSearch、Logstash和Kiabana三个开源工具组成，作用是集�
 <meta property="og:description" content="周末参加活动看见别人分享的MONOLOG优化及打造ELK友好的日志格式 ，会后了解了下ELK，看见网上最新的资料比较少，大多是过去的版本，不同版本的配置有些许区别，所以花了一点时间学习了下，记录下来分享一下，希望对你有用，话不多说，下面开始。
 ELK是什么？
 ELK由ElasticSearch、Logstash和Kiabana三个开源工具组成，作用是集中化管理日志，而且对于日志的统计、检索、排序等">
-<meta property="og:updated_time" content="2017-03-26T14:37:45.000Z">
+<meta property="og:image" content="http://ong8z3v18.bkt.clouddn.com/jdk.png">
+<meta property="og:image" content="http://ong8z3v18.bkt.clouddn.com/elastic.png">
+<meta property="og:image" content="http://ong8z3v18.bkt.clouddn.com/es-head.png">
+<meta property="og:image" content="http://ong8z3v18.bkt.clouddn.com/es-head-1.png">
+<meta property="og:image" content="http://ong8z3v18.bkt.clouddn.com/es-head-2.png">
+<meta property="og:image" content="http://ong8z3v18.bkt.clouddn.com/es-head-3.png">
+<meta property="og:image" content="http://ong8z3v18.bkt.clouddn.com/kibana.png">
+<meta property="og:image" content="http://ong8z3v18.bkt.clouddn.com/kibana-discover.png">
+<meta property="og:updated_time" content="2017-03-27T01:35:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="开源实时日志分析ELK平台实践">
 <meta name="twitter:description" content="周末参加活动看见别人分享的MONOLOG优化及打造ELK友好的日志格式 ，会后了解了下ELK，看见网上最新的资料比较少，大多是过去的版本，不同版本的配置有些许区别，所以花了一点时间学习了下，记录下来分享一下，希望对你有用，话不多说，下面开始。
 ELK是什么？
 ELK由ElasticSearch、Logstash和Kiabana三个开源工具组成，作用是集中化管理日志，而且对于日志的统计、检索、排序等">
+<meta name="twitter:image" content="http://ong8z3v18.bkt.clouddn.com/jdk.png">
 
 
 
@@ -437,6 +446,7 @@ ELK由ElasticSearch、Logstash和Kiabana三个开源工具组成，作用是集�
 <li><p>Java jdk</p>
 <ul>
 <li><p>地址：<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="external">JDK</a></p>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/jdk.png" alt="jdk"></p>
 </li>
 <li><p>选择Accept License Agreement，选择你系统对应版本，这里我选择<a href="http://www.oracle.com/technetwork/java/javase/downloads/javascript: void(0" target="_blank" rel="external">jdk-8u121-macosx-x64.dmg</a>) 傻瓜版</p>
 <blockquote>
@@ -466,6 +476,7 @@ ELK由ElasticSearch、Logstash和Kiabana三个开源工具组成，作用是集�
 <li><p>Logstash </p>
 <ul>
 <li><p>地址：<a href="https://www.elastic.co/downloads，" target="_blank" rel="external">https://www.elastic.co/downloads，</a> 我们可以看到ELK三个产品</p>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/elastic.png" alt="elastic"></p>
 </li>
 <li><p>点击 Download，选择你系统对应的文件下载，这里我选择的tar.gz</p>
 </li>
@@ -500,6 +511,7 @@ ELK由ElasticSearch、Logstash和Kiabana三个开源工具组成，作用是集�
 <p>网上安装方法很多，没几个成功的，可能是版本原因，所以我直接从Github上下一个</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">clone</span> git://github.com/mobz/elasticsearch-head.git</div><div class="line">$ <span class="built_in">cd</span> elasticsearch-head</div><div class="line">$ npm install <span class="comment"># 由于head基于nodejs</span></div><div class="line">$ grunt server</div><div class="line"><span class="comment"># 浏览器访问 http://localhost:9100/</span></div></pre></td></tr></table></figure>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/es-head.png" alt="es-head"></p>
 <blockquote>
 <p>这里可能遇见问题 “集群健康值: 未连接”</p>
 <p>修改elasticsearch.yml文件</p>
@@ -508,6 +520,15 @@ ELK由ElasticSearch、Logstash和Kiabana三个开源工具组成，作用是集�
 <p><code>http.cors.allow-origin: ``&quot;*&quot;</code></p>
 <p>重启ES和HEAD就可以了</p>
 </blockquote>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/es-head-1.png" alt="es-head-1"></p>
+<ul>
+<li>切换到Browser标签</li>
+</ul>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/es-head-2.png" alt="es-head-2"></p>
+<ul>
+<li>单击某一个文档（doc），则会展示该文档的所有信息</li>
+</ul>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/es-head-3.png" alt="es-head-2"></p>
 </li>
 </ul>
 </li>
@@ -519,6 +540,7 @@ ELK由ElasticSearch、Logstash和Kiabana三个开源工具组成，作用是集�
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ tar -zxf kibana-5.2.2-darwin-x86_64.tar -C /usr/<span class="built_in">local</span>/</div><div class="line">$ /usr/<span class="built_in">local</span>/kibana-5.2.2-darwin-x86_64/bin/kibana</div><div class="line">浏览器访问http://localhost:5601/ 就可以查看安装成功了</div></pre></td></tr></table></figure>
 </li>
 </ul>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/kibana.png" alt="kinaba"></p>
 </li>
 </ul>
 <h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><blockquote>
@@ -535,13 +557,16 @@ ELK由ElasticSearch、Logstash和Kiabana三个开源工具组成，作用是集�
 </li>
 <li><p>Kinaba 配置</p>
 <ul>
-<li>第一次访问kibana会重定向到设置索引的页面,如果输入logstash-*就是匹配所有的索引，还可以指定日期，logstash的索引是按日期区分的，一个日期一个文件夹</li>
-<li>create 之后点击Discover就可以查看分组的日志和实时日志。</li>
+<li><p>第一次访问kibana会重定向到设置索引的页面,如果输入logstash-*就是匹配所有的索引，还可以指定日期，logstash的索引是按日期区分的，一个日期一个文件夹</p>
+</li>
+<li><p>create 之后点击Discover就可以查看分组的日志和实时日志。</p>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/kibana-discover.png" alt="kibana-discover"></p>
+</li>
 </ul>
 </li>
 </ul>
 <blockquote>
-<p>想要深入学习请持续关注。</p>
+<p>参考文章：<a href="http://baidu.blog.51cto.com/71938/1676798" target="_blank" rel="external">http://baidu.blog.51cto.com/71938/1676798</a></p>
 </blockquote>
 
       
