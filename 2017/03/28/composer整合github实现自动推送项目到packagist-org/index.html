@@ -1,0 +1,1008 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="composer,packagist,github," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="空" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+  <link rel="apple-touch-icon" sizes="57x57" href="/image/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/image/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/image/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/image/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/image/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/image/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/image/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/image/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/image/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/image/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/image/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/image/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/image/favicon-16x16.png">
+  <link rel="manifest" href="/image/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/image/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+
+
+
+
+
+<meta name="description" content="概念
+Composer
+PHP包管理工具（例如：Ruby的RubyGems, Nodejs的npm, Python的pip)
+
+
+Packagist.org
+composer  镜像
+中国镜像地址：https://pkg.phpcomposer.com
+
+
+Github
+GitHub 是一个面向开源及私有软件项目的托管平台，因为只支持 Git 作为唯一的版本库格式进行托管，故名 GitHub。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="composer整合github实现自动推送项目到packagist.org">
+<meta property="og:url" content="http://ljh.name/2017/03/28/composer整合github实现自动推送项目到packagist-org/index.html">
+<meta property="og:site_name" content="空">
+<meta property="og:description" content="概念
+Composer
+PHP包管理工具（例如：Ruby的RubyGems, Nodejs的npm, Python的pip)
+
+
+Packagist.org
+composer  镜像
+中国镜像地址：https://pkg.phpcomposer.com
+
+
+Github
+GitHub 是一个面向开源及私有软件项目的托管平台，因为只支持 Git 作为唯一的版本库格式进行托管，故名 GitHub。">
+<meta property="og:image" content="http://ong8z3v18.bkt.clouddn.com/github-new-repo.png">
+<meta property="og:image" content="http://ong8z3v18.bkt.clouddn.com/github-create-repo.png">
+<meta property="og:image" content="http://ong8z3v18.bkt.clouddn.com/packagist-submit.png">
+<meta property="og:image" content="http://ong8z3v18.bkt.clouddn.com/package-check.png">
+<meta property="og:image" content="http://ong8z3v18.bkt.clouddn.com/package-show.png">
+<meta property="og:image" content="http://ong8z3v18.bkt.clouddn.com/package-show.png">
+<meta property="og:image" content="http://ong8z3v18.bkt.clouddn.com/github-setting.png">
+<meta property="og:image" content="http://ong8z3v18.bkt.clouddn.com/github-addservice.png">
+<meta property="og:image" content="http://ong8z3v18.bkt.clouddn.com/github-package.png">
+<meta property="og:image" content="http://ong8z3v18.bkt.clouddn.com/package-token.png">
+<meta property="og:updated_time" content="2017-03-28T07:05:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="composer整合github实现自动推送项目到packagist.org">
+<meta name="twitter:description" content="概念
+Composer
+PHP包管理工具（例如：Ruby的RubyGems, Nodejs的npm, Python的pip)
+
+
+Packagist.org
+composer  镜像
+中国镜像地址：https://pkg.phpcomposer.com
+
+
+Github
+GitHub 是一个面向开源及私有软件项目的托管平台，因为只支持 Git 作为唯一的版本库格式进行托管，故名 GitHub。">
+<meta name="twitter:image" content="http://ong8z3v18.bkt.clouddn.com/github-new-repo.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://ljh.name/2017/03/28/composer整合github实现自动推送项目到packagist-org/"/>
+
+
+
+
+
+  <title> composer整合github实现自动推送项目到packagist.org | 空 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?fd667ce7bb816543fe7c8073a4b381ba";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">空</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://ljh.name/2017/03/28/composer整合github实现自动推送项目到packagist-org/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Li Jianhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://secure.gravatar.com/avatar/7992114d3fb9bebb3271d4cf53829c0c?s=64">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="空">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                composer整合github实现自动推送项目到packagist.org
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-28T13:36:30+08:00">
+                2017-03-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术学习/" itemprop="url" rel="index">
+                    <span itemprop="name">技术学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/03/28/composer整合github实现自动推送项目到packagist-org/" class="leancloud_visitors" data-flag-title="composer整合github实现自动推送项目到packagist.org">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul>
+<li><a href="https://getcomposer.org" target="_blank" rel="external">Composer</a><ul>
+<li>PHP包管理工具（例如：Ruby的RubyGems, Nodejs的npm, Python的pip)</li>
+</ul>
+</li>
+<li><a href="https://packagist.org" target="_blank" rel="external">Packagist.org</a><ul>
+<li>composer  镜像</li>
+<li>中国镜像地址：<a href="https://pkg.phpcomposer.com" target="_blank" rel="external">https://pkg.phpcomposer.com</a></li>
+</ul>
+</li>
+<li><a href="https://www.github.com" target="_blank" rel="external">Github</a><ul>
+<li><em>GitHub</em> 是一个面向开源及私有软件项目的托管平台，因为只支持 Git 作为唯一的版本库格式进行托管，故名 <em>GitHub</em>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><h5 id="系统环境"><a href="#系统环境" class="headerlink" title="系统环境"></a>系统环境</h5><p>System：OS X EI Capitan (版本10.11.6)</p>
+<ul>
+<li><p>Composer</p>
+<blockquote>
+<p>安装Composer之前请确保安装了PHP</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ curl <span class="_">-s</span>S https://getcomposer.org/installer | php <span class="comment"># 下载composer</span></div><div class="line">&gt;  <span class="comment">#!/usr/bin/env php</span></div><div class="line">All settings correct <span class="keyword">for</span> using Composer</div><div class="line">Downloading...</div><div class="line">&gt;</div><div class="line">&gt;Composer successfully installed to: /root/composer.phar</div><div class="line">&gt;Use it: php composer.phar  <span class="comment"># 会下载一个composer.phar文件</span></div><div class="line">$ mv composer.phar /usr/<span class="built_in">local</span>/bin/composer</div><div class="line">$ composer -V</div><div class="line">Composer version 1.1.1 <span class="comment"># 安装成功</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>如果下载不成功，可以 <a href="https://getcomposer.org/composer.phar" target="_blank" rel="external">download composer.phar</a></p>
+</blockquote>
+</li>
+</ul>
+<h5 id="提交composer-json-到github"><a href="#提交composer-json-到github" class="headerlink" title="提交composer.json 到github"></a>提交composer.json 到github</h5><ul>
+<li><p>在GitHub创建项目</p>
+<blockquote>
+<p>默认你已经有Github账号，并且懂得git基本操作</p>
+</blockquote>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/github-new-repo.png" alt="github-new-repo"></p>
+</li>
+</ul>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/github-create-repo.png" alt="github-create-repo"></p>
+<ul>
+<li><p>克隆项目到本地并且建立composer.json</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">clone</span> https://github.com/lijianhua/demo.git demo <span class="comment"># 克隆项目</span></div><div class="line">$ <span class="built_in">cd</span> demo</div><div class="line">$ composer init <span class="comment"># 生成composer.json文件</span></div><div class="line"> Welcome to the Composer config generator  </div><div class="line">                                            </div><div class="line"></div><div class="line"></div><div class="line">This <span class="built_in">command</span> will guide you through creating your composer.json config.</div><div class="line"></div><div class="line">Package name (&lt;vendor&gt;/&lt;name&gt;) [root/demo]:lijianhua/demo<span class="comment"># 设置你的package 名字</span></div><div class="line">Description []: This a demo <span class="keyword">for</span> build composer packagist .<span class="comment"># 描述</span></div><div class="line">Author [Li Jianhua &lt;lijianhua_oop@163.com&gt;, n to skip]: <span class="comment"># 作者信息</span></div><div class="line">Minimum Stability []: dev <span class="comment"># 稳定版本</span></div><div class="line">Package Type (e.g. library, project, metapackage, composer-plugin) []: project <span class="comment"># package 类型</span></div><div class="line">License []: MIT <span class="comment"># 开源协议 有五种：(BSD，Apache，GPL，LGPL，MIT)</span></div><div class="line"></div><div class="line">Define your dependencies.</div><div class="line"></div><div class="line">Would you like to define your dependencies (require) interactively [yes]? no </div><div class="line"><span class="comment"># 是否有依赖于别的package, 这里选择no， 如果选yes会问以来名字和版本等</span></div><div class="line"></div><div class="line">&#123;                                                                                    </div><div class="line">    <span class="string">"name"</span>: <span class="string">"lijianhua/demo"</span>,                                                                                                                               </div><div class="line">    <span class="string">"description"</span>: <span class="string">"demo"</span>,                                                           </div><div class="line">    <span class="string">"type"</span>: <span class="string">"project"</span>,                                                               </div><div class="line">    <span class="string">"license"</span>: <span class="string">"MIT"</span>,                                                                </div><div class="line">    <span class="string">"authors"</span>: [                                                                     </div><div class="line">        &#123;                                                                            </div><div class="line">            <span class="string">"name"</span>: <span class="string">"Li Jianhua"</span>,                                                    </div><div class="line">            <span class="string">"email"</span>: <span class="string">"lijianhua_oop@163.com"</span>                                         </div><div class="line">        &#125;                                                                            </div><div class="line">    ],                                                                               </div><div class="line">    <span class="string">"minimum-stability"</span>: <span class="string">"dev"</span>,                                                      </div><div class="line">    <span class="string">"require"</span>: &#123;&#125;                                                                    </div><div class="line">&#125;    </div><div class="line">Do you confirm generation [yes]? yes</div><div class="line">Would you like the vendor directory added to your .gitignore [yes]? yes</div><div class="line">$ ls</div><div class="line">composer.json  </div><div class="line">$ git add composer.json</div><div class="line">$ git commit -am <span class="string">'first commit'</span></div><div class="line">$ git push -u origin master</div></pre></td></tr></table></figure>
+<blockquote>
+<p>现在你的项目就创建完毕了，并且提交到了Github上</p>
+</blockquote>
+<h5 id="建立GitHub和packagist-org的关联"><a href="#建立GitHub和packagist-org的关联" class="headerlink" title="建立GitHub和packagist.org的关联"></a>建立GitHub和packagist.org的关联</h5><ul>
+<li><p>访问 packagist.org，并登陆，可以选择GitHub账号登陆,点击Submit</p>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/packagist-submit.png" alt="packagist-submit"></p>
+</li>
+<li><p>复制Github地址，点击check后如果没有重名点击submit</p>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/package-check.png" alt="package-check"></p>
+<blockquote>
+<p>提示我已经创建，如果你第一次提示已经被创建，修改composer.json里的name 并且提交到GitHub，重新验证直到成功为止</p>
+</blockquote>
+</li>
+<li><p>提交成功后，出现如下页面</p>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/package-show.png" alt="package-show"></p>
+</li>
+<li><p>现在就可以通过命令来创建项目</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ composer create-project lijianhua/demo a dev-master --prefer-dist </div><div class="line">$ <span class="built_in">cd</span> a</div><div class="line">$ ls</div><div class="line">composer.json <span class="comment"># 代码已经成功创建到本地，</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>接下来我们回到package 的创建目录：demo</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> demo</div><div class="line">$ vim index.php <span class="comment"># 创建index.php 添加如下代码</span></div><div class="line">$ cat index.php</div><div class="line">&lt;?php</div><div class="line">  <span class="built_in">echo</span> <span class="string">'成功'</span>;</div><div class="line">?&gt;</div><div class="line">$ git add</div><div class="line">$ git commit -am <span class="string">'add index'</span></div><div class="line">$ git push origin master <span class="comment"># 此时查看GitHub，看见index.php已经提交</span></div><div class="line">$ <span class="built_in">cd</span> .. <span class="comment"># 退出demo目录</span></div><div class="line">$ composer create-project lijianhua/demo a2 dev-master --prefer-dist <span class="comment"># 创建项目a2</span></div><div class="line">$ <span class="built_in">cd</span> a2</div><div class="line">$ ls</div><div class="line">composer.json <span class="comment"># 发现没有index.php</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>这时我们手动点击下图的update</p>
+</blockquote>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/package-show.png" alt="package-show"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ composer create-project lijianhua/demo a3 dev-master --prefer-dist <span class="comment"># 3</span></div><div class="line">$ <span class="built_in">cd</span> a3</div><div class="line">$ ls</div><div class="line">composer.json index.php <span class="comment"># 这时候index.php已经提交到packagist了</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>当然上述方法太过麻烦，下面我们展示自动推送</p>
+</blockquote>
+</li>
+</ul>
+<h5 id="GitHub自动推送项目到packagist"><a href="#GitHub自动推送项目到packagist" class="headerlink" title="GitHub自动推送项目到packagist"></a>GitHub自动推送项目到packagist</h5><ul>
+<li><p>在Github 项目页点击setting，在出现的页面选择 services</p>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/github-setting.png" alt="github-setting"></p>
+</li>
+<li><p>点击add service, 在出现的框内选择packagist并添加</p>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/github-addservice.png" alt="github-addservice"></p>
+</li>
+<li><p>填写你的user 就是你的github用户名，Domain 就是 packagist的地址</p>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/github-package.png" alt="github-pack"></p>
+</li>
+<li><p>Token 在packagist 官网点击Profile-&gt;Show API Token，辅助内容到上图，保存就可以了。</p>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/package-token.png" alt="package-token"></p>
+<blockquote>
+<p>现在更新你demo后就会自动提交到packagist上，由于延迟等原因每次提交可能需要一点时间大概1分钟左右。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/composer/" rel="tag"># composer</a>
+          
+            <a href="/tags/packagist/" rel="tag"># packagist</a>
+          
+            <a href="/tags/github/" rel="tag"># github</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/26/开源实时日志分析ELK平台实践/" rel="next" title="开源实时日志分析ELK平台实践">
+                <i class="fa fa-chevron-left"></i> 开源实时日志分析ELK平台实践
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://secure.gravatar.com/avatar/7992114d3fb9bebb3271d4cf53829c0c?s=64"
+               alt="Li Jianhua" />
+          <p class="site-author-name" itemprop="name">Li Jianhua</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#系统环境"><span class="nav-number">2.0.1.</span> <span class="nav-text">系统环境</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#提交composer-json-到github"><span class="nav-number">2.0.2.</span> <span class="nav-text">提交composer.json 到github</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#建立GitHub和packagist-org的关联"><span class="nav-number">2.0.3.</span> <span class="nav-text">建立GitHub和packagist.org的关联</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#GitHub自动推送项目到packagist"><span class="nav-number">2.0.4.</span> <span class="nav-text">GitHub自动推送项目到packagist</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Li Jianhua</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("FyKqp1B2nTTuaAilfn5onXYx-gzGzoHsz", "wsk4RjWPraU2ATB9PVdo9XoY");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

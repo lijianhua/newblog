@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ljh.name/"/>
-  <updated>2017-03-27T01:35:10.000Z</updated>
+  <updated>2017-03-28T07:05:57.000Z</updated>
   <id>http://ljh.name/</id>
   
   <author>
@@ -14,6 +14,122 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>composer整合github实现自动推送项目到packagist.org</title>
+    <link href="http://ljh.name/2017/03/28/composer%E6%95%B4%E5%90%88github%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E6%8E%A8%E9%80%81%E9%A1%B9%E7%9B%AE%E5%88%B0packagist-org/"/>
+    <id>http://ljh.name/2017/03/28/composer整合github实现自动推送项目到packagist-org/</id>
+    <published>2017-03-28T05:36:30.000Z</published>
+    <updated>2017-03-28T07:05:57.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul>
+<li><a href="https://getcomposer.org" target="_blank" rel="external">Composer</a><ul>
+<li>PHP包管理工具（例如：Ruby的RubyGems, Nodejs的npm, Python的pip)</li>
+</ul>
+</li>
+<li><a href="https://packagist.org" target="_blank" rel="external">Packagist.org</a><ul>
+<li>composer  镜像</li>
+<li>中国镜像地址：<a href="https://pkg.phpcomposer.com" target="_blank" rel="external">https://pkg.phpcomposer.com</a></li>
+</ul>
+</li>
+<li><a href="https://www.github.com" target="_blank" rel="external">Github</a><ul>
+<li><em>GitHub</em> 是一个面向开源及私有软件项目的托管平台，因为只支持 Git 作为唯一的版本库格式进行托管，故名 <em>GitHub</em>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><h5 id="系统环境"><a href="#系统环境" class="headerlink" title="系统环境"></a>系统环境</h5><p>System：OS X EI Capitan (版本10.11.6)</p>
+<ul>
+<li><p>Composer</p>
+<blockquote>
+<p>安装Composer之前请确保安装了PHP</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ curl <span class="_">-s</span>S https://getcomposer.org/installer | php <span class="comment"># 下载composer</span></div><div class="line">&gt;  <span class="comment">#!/usr/bin/env php</span></div><div class="line">All settings correct <span class="keyword">for</span> using Composer</div><div class="line">Downloading...</div><div class="line">&gt;</div><div class="line">&gt;Composer successfully installed to: /root/composer.phar</div><div class="line">&gt;Use it: php composer.phar  <span class="comment"># 会下载一个composer.phar文件</span></div><div class="line">$ mv composer.phar /usr/<span class="built_in">local</span>/bin/composer</div><div class="line">$ composer -V</div><div class="line">Composer version 1.1.1 <span class="comment"># 安装成功</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>如果下载不成功，可以 <a href="https://getcomposer.org/composer.phar" target="_blank" rel="external">download composer.phar</a></p>
+</blockquote>
+</li>
+</ul>
+<h5 id="提交composer-json-到github"><a href="#提交composer-json-到github" class="headerlink" title="提交composer.json 到github"></a>提交composer.json 到github</h5><ul>
+<li><p>在GitHub创建项目</p>
+<blockquote>
+<p>默认你已经有Github账号，并且懂得git基本操作</p>
+</blockquote>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/github-new-repo.png" alt="github-new-repo"></p>
+</li>
+</ul>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/github-create-repo.png" alt="github-create-repo"></p>
+<ul>
+<li><p>克隆项目到本地并且建立composer.json</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">clone</span> https://github.com/lijianhua/demo.git demo <span class="comment"># 克隆项目</span></div><div class="line">$ <span class="built_in">cd</span> demo</div><div class="line">$ composer init <span class="comment"># 生成composer.json文件</span></div><div class="line"> Welcome to the Composer config generator  </div><div class="line">                                            </div><div class="line"></div><div class="line"></div><div class="line">This <span class="built_in">command</span> will guide you through creating your composer.json config.</div><div class="line"></div><div class="line">Package name (&lt;vendor&gt;/&lt;name&gt;) [root/demo]:lijianhua/demo<span class="comment"># 设置你的package 名字</span></div><div class="line">Description []: This a demo <span class="keyword">for</span> build composer packagist .<span class="comment"># 描述</span></div><div class="line">Author [Li Jianhua &lt;lijianhua_oop@163.com&gt;, n to skip]: <span class="comment"># 作者信息</span></div><div class="line">Minimum Stability []: dev <span class="comment"># 稳定版本</span></div><div class="line">Package Type (e.g. library, project, metapackage, composer-plugin) []: project <span class="comment"># package 类型</span></div><div class="line">License []: MIT <span class="comment"># 开源协议 有五种：(BSD，Apache，GPL，LGPL，MIT)</span></div><div class="line"></div><div class="line">Define your dependencies.</div><div class="line"></div><div class="line">Would you like to define your dependencies (require) interactively [yes]? no </div><div class="line"><span class="comment"># 是否有依赖于别的package, 这里选择no， 如果选yes会问以来名字和版本等</span></div><div class="line"></div><div class="line">&#123;                                                                                    </div><div class="line">    <span class="string">"name"</span>: <span class="string">"lijianhua/demo"</span>,                                                                                                                               </div><div class="line">    <span class="string">"description"</span>: <span class="string">"demo"</span>,                                                           </div><div class="line">    <span class="string">"type"</span>: <span class="string">"project"</span>,                                                               </div><div class="line">    <span class="string">"license"</span>: <span class="string">"MIT"</span>,                                                                </div><div class="line">    <span class="string">"authors"</span>: [                                                                     </div><div class="line">        &#123;                                                                            </div><div class="line">            <span class="string">"name"</span>: <span class="string">"Li Jianhua"</span>,                                                    </div><div class="line">            <span class="string">"email"</span>: <span class="string">"lijianhua_oop@163.com"</span>                                         </div><div class="line">        &#125;                                                                            </div><div class="line">    ],                                                                               </div><div class="line">    <span class="string">"minimum-stability"</span>: <span class="string">"dev"</span>,                                                      </div><div class="line">    <span class="string">"require"</span>: &#123;&#125;                                                                    </div><div class="line">&#125;    </div><div class="line">Do you confirm generation [yes]? yes</div><div class="line">Would you like the vendor directory added to your .gitignore [yes]? yes</div><div class="line">$ ls</div><div class="line">composer.json  </div><div class="line">$ git add composer.json</div><div class="line">$ git commit -am <span class="string">'first commit'</span></div><div class="line">$ git push -u origin master</div></pre></td></tr></table></figure>
+<blockquote>
+<p>现在你的项目就创建完毕了，并且提交到了Github上</p>
+</blockquote>
+<h5 id="建立GitHub和packagist-org的关联"><a href="#建立GitHub和packagist-org的关联" class="headerlink" title="建立GitHub和packagist.org的关联"></a>建立GitHub和packagist.org的关联</h5><ul>
+<li><p>访问 packagist.org，并登陆，可以选择GitHub账号登陆,点击Submit</p>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/packagist-submit.png" alt="packagist-submit"></p>
+</li>
+<li><p>复制Github地址，点击check后如果没有重名点击submit</p>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/package-check.png" alt="package-check"></p>
+<blockquote>
+<p>提示我已经创建，如果你第一次提示已经被创建，修改composer.json里的name 并且提交到GitHub，重新验证直到成功为止</p>
+</blockquote>
+</li>
+<li><p>提交成功后，出现如下页面</p>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/package-show.png" alt="package-show"></p>
+</li>
+<li><p>现在就可以通过命令来创建项目</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ composer create-project lijianhua/demo a dev-master --prefer-dist </div><div class="line">$ <span class="built_in">cd</span> a</div><div class="line">$ ls</div><div class="line">composer.json <span class="comment"># 代码已经成功创建到本地，</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>接下来我们回到package 的创建目录：demo</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> demo</div><div class="line">$ vim index.php <span class="comment"># 创建index.php 添加如下代码</span></div><div class="line">$ cat index.php</div><div class="line">&lt;?php</div><div class="line">  <span class="built_in">echo</span> <span class="string">'成功'</span>;</div><div class="line">?&gt;</div><div class="line">$ git add</div><div class="line">$ git commit -am <span class="string">'add index'</span></div><div class="line">$ git push origin master <span class="comment"># 此时查看GitHub，看见index.php已经提交</span></div><div class="line">$ <span class="built_in">cd</span> .. <span class="comment"># 退出demo目录</span></div><div class="line">$ composer create-project lijianhua/demo a2 dev-master --prefer-dist <span class="comment"># 创建项目a2</span></div><div class="line">$ <span class="built_in">cd</span> a2</div><div class="line">$ ls</div><div class="line">composer.json <span class="comment"># 发现没有index.php</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>这时我们手动点击下图的update</p>
+</blockquote>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/package-show.png" alt="package-show"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ composer create-project lijianhua/demo a3 dev-master --prefer-dist <span class="comment"># 3</span></div><div class="line">$ <span class="built_in">cd</span> a3</div><div class="line">$ ls</div><div class="line">composer.json index.php <span class="comment"># 这时候index.php已经提交到packagist了</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>当然上述方法太过麻烦，下面我们展示自动推送</p>
+</blockquote>
+</li>
+</ul>
+<h5 id="GitHub自动推送项目到packagist"><a href="#GitHub自动推送项目到packagist" class="headerlink" title="GitHub自动推送项目到packagist"></a>GitHub自动推送项目到packagist</h5><ul>
+<li><p>在Github 项目页点击setting，在出现的页面选择 services</p>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/github-setting.png" alt="github-setting"></p>
+</li>
+<li><p>点击add service, 在出现的框内选择packagist并添加</p>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/github-addservice.png" alt="github-addservice"></p>
+</li>
+<li><p>填写你的user 就是你的github用户名，Domain 就是 packagist的地址</p>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/github-package.png" alt="github-pack"></p>
+</li>
+<li><p>Token 在packagist 官网点击Profile-&gt;Show API Token，辅助内容到上图，保存就可以了。</p>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/package-token.png" alt="package-token"></p>
+<blockquote>
+<p>现在更新你demo后就会自动提交到packagist上，由于延迟等原因每次提交可能需要一点时间大概1分钟左右。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;概念&quot;&gt;&lt;a href=&quot;#概念&quot; class=&quot;headerlink&quot; title=&quot;概念&quot;&gt;&lt;/a&gt;概念&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://getcomposer.org&quot; target=&quot;_blank&quot; rel=&quot;external&quot;
+    
+    </summary>
+    
+      <category term="技术学习" scheme="http://ljh.name/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="composer" scheme="http://ljh.name/tags/composer/"/>
+    
+      <category term="packagist" scheme="http://ljh.name/tags/packagist/"/>
+    
+      <category term="github" scheme="http://ljh.name/tags/github/"/>
+    
+  </entry>
   
   <entry>
     <title>开源实时日志分析ELK平台实践</title>
