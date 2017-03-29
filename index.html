@@ -287,6 +287,227 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://ljh.name/2017/03/29/如何配置SSL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Li Jianhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://secure.gravatar.com/avatar/7992114d3fb9bebb3271d4cf53829c0c?s=64">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="空">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/29/如何配置SSL/" itemprop="url">
+                  如何配置SSL证书
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-29T09:31:21+08:00">
+                2017-03-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术学习/" itemprop="url" rel="index">
+                    <span itemprop="name">技术学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/03/29/如何配置SSL/" class="leancloud_visitors" data-flag-title="如何配置SSL证书">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="什么是SSL？"><a href="#什么是SSL？" class="headerlink" title="什么是SSL？"></a>什么是SSL？</h4><p><a href="http://baike.baidu.com/link?url=dQo5hplNvTsfm_Lcwq_1bHVmReQAsYM5uTxWLm2fx2zGKdcymmnO0uZjXED2vGao9qzo_jgWT7AOlF1qcKjiOa" target="_blank" rel="external">SSL</a>(Secure Sockets Layer <a href="http://baike.baidu.com/item/%E5%AE%89%E5%85%A8%E5%A5%97%E6%8E%A5%E5%B1%82" target="_blank" rel="external">安全套接层</a>),及其继任者<a href="http://baike.baidu.com/item/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8" target="_blank" rel="external">传输层安全</a>（Transport Layer Security，TLS）是为<a href="http://baike.baidu.com/item/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1" target="_blank" rel="external">网络通信</a>提供安全及<a href="http://baike.baidu.com/item/%E6%95%B0%E6%8D%AE%E5%AE%8C%E6%95%B4%E6%80%A7" target="_blank" rel="external">数据完整性</a>的一种安全协议。TLS与SSL在<a href="http://baike.baidu.com/item/%E4%BC%A0%E8%BE%93%E5%B1%82" target="_blank" rel="external">传输层</a>对网络连接进行加密。</p>
+<h4 id="为什么使用SSL"><a href="#为什么使用SSL" class="headerlink" title="为什么使用SSL?"></a>为什么使用SSL?</h4><p>机密性：SSL协议使用密钥加密通信数据。</p>
+<p>可靠性：服务器和客户都会被认证，客户的认证是可选的。</p>
+<p>完整性：SSL协议会对传送的数据进行完整性检查。</p>
+<h4 id="在哪申请SSL证书"><a href="#在哪申请SSL证书" class="headerlink" title="在哪申请SSL证书?"></a>在哪申请SSL证书?</h4><p><a href="https://www.startssl.com/" target="_blank" rel="external">Startssl免费证书</a> 推荐</p>
+<p><a href="https://letsencrypt.org/" target="_blank" rel="external">Letsencrypt证书</a> 推荐</p>
+<p><a href="https://freessl.wosign.com/" target="_blank" rel="external">Wosign免费证书</a></p>
+<h4 id="在Startssl-上申请-SSL证书"><a href="#在Startssl-上申请-SSL证书" class="headerlink" title="在Startssl 上申请 SSL证书"></a>在Startssl 上申请 SSL证书</h4><ul>
+<li><p>首先登陆到startssl并注册，两种登陆方式：证书登陆，需要你安装证书，还有一种就是发送密码到你的注册邮箱</p>
+</li>
+<li><p>登陆成功后会跳到如下页面，首先验证域名证明域名归你所有,点击</p>
+<p>Validations  Wizard填写域名并提交</p>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/validations.png" alt="validations"></p>
+</li>
+<li><p>进入域名所有者信息验证页，选择你的邮箱会发送一个验证码到你的邮箱，填写验证码提交，注册成功</p>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/validationmail.png" alt="validationsmail"></p>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/validation-success.png" alt="success"></p>
+<blockquote>
+<p>可能有的人找不到自己的邮箱，这是你开启了域名隐私保护，去域名管理的地方关闭一下，重新提交就找到你的邮箱了</p>
+</blockquote>
+</li>
+<li><p>点击Certificates Wizard,填写你的域名，子域名等，最多可以添加5个</p>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/certificates.png" alt="cerwiz"></p>
+</li>
+<li><p>填写域名后，下面需要生成CSR文件并且填入提交</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">$ openssl req -newkey rsa:2048 -keyout generate-favicon.key -out generate-favicon.csr <span class="comment"># 复制命令</span></div><div class="line">Generating a 2048 bit RSA private key</div><div class="line">................................................................................................................................................+++</div><div class="line">........................................+++</div><div class="line">writing new private key to <span class="string">'generate-favicon.key'</span></div><div class="line">Enter PEM pass phrase:   <span class="comment">#  解密需要的密码</span></div><div class="line">Verifying - Enter PEM pass phrase:</div><div class="line">-----</div><div class="line">You are about to be asked to enter information that will be incorporated</div><div class="line">into your certificate request.</div><div class="line">What you are about to enter is what is called a Distinguished Name or a DN.</div><div class="line">There are quite a few fields but you can leave some blank</div><div class="line">For some fields there will be a default value,</div><div class="line">If you enter <span class="string">'.'</span>, the field will be left blank.</div><div class="line">-----</div><div class="line">Country Name (2 letter code) [AU]:CN</div><div class="line">State or Province Name (full name) [Some-State]:Gubler</div><div class="line">Locality Name (eg, city) []:BJ</div><div class="line">Organization Name (eg, company) [Internet Widgits Pty Ltd]:</div><div class="line">Organizational Unit Name (eg, section) []:</div><div class="line">Common Name (e.g. server FQDN or YOUR name) []:gubler <span class="comment"># 提交人姓名</span></div><div class="line">Email Address []:lijianhua_oop@163.com <span class="comment">#提交人的邮箱</span></div><div class="line"></div><div class="line">Please enter the following <span class="string">'extra'</span> attributes</div><div class="line">to be sent with your certificate request</div><div class="line">A challenge password []:gubler </div><div class="line">An optional company name []:gubler</div><div class="line">$ ls</div><div class="line">generate-favicon.csr generate-favicon.key</div><div class="line">$ cat generate-favicon.csr <span class="comment"># 复制cat出来的内容，粘贴到SSL网站并且提交</span></div></pre></td></tr></table></figure>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/csr.png" alt="csr"></p>
+</li>
+<li><p>提交成功后在返回的页面点击选中地方，下载一个文件</p>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/download-csr.png" alt="download"></p>
+</li>
+<li><p>文件是各种服务器需要的crt证书，我选择的是Nginx证书，解压后的文件用SCP发送到服务器</p>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/blog-server.png" alt="server"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ scp 1_blog.generate-favicon.com_bundle.crt root@111.111.111.111:/</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="在Nginx配置SSL-证书"><a href="#在Nginx配置SSL-证书" class="headerlink" title="在Nginx配置SSL 证书"></a>在Nginx配置SSL 证书</h4><ul>
+<li><p>配置SSL证书需要两个文件一个是解压赌赢服务器文件所得的证书，例如：选择的NginxServer.zip解压缩的文件</p>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/csrblog.png" alt="csrblog"></p>
+</li>
+<li><p>另一个文件是解密我们生成的key文件所得的内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cat generate-favicon.key <span class="comment"># 复制cat出的数据到startssl</span></div></pre></td></tr></table></figure>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/decrypt.png" alt="decrypt"></p>
+<blockquote>
+<p>点击Tool  Box 选择Decrypt Private Key 复制cat出的数据到 Private key,</p>
+<p>Passphrase 输入之前生成文件时候设置的PEM pass phrase，点击Decrypt 复制解密的内容 粘贴到后缀名为.key的文件</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ vim  generate-favicon_de.key <span class="comment"># 复制内容到这个文件，这就是配置所需要的第二个文件</span></div><div class="line">$ scp  generate-favicon_de.key root@111.111.111.111:/ <span class="comment"># 上传到服务器</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>配置nginx </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">$ mv generate-favicon_de.key  1_blog.generate-favicon.com_bundle.crt /usr/<span class="built_in">local</span>/etc/nginx/ssl <span class="comment"># 移动两个文件到新建的SSL目录 不是必须的 我是为了方便找</span></div><div class="line">$ vim /usr/<span class="built_in">local</span>/etc/nginx/nginx.conf <span class="comment"># 打开默认配置文件，也可以是你网站所在的配置文件</span></div><div class="line"><span class="comment"># 去掉注释</span></div><div class="line"> server &#123;                                                                                                                                                </div><div class="line">        listen       443 ssl;                                                        </div><div class="line">        server_name  localhost; <span class="comment"># 你网站的域名         </span></div><div class="line">                                                                                     </div><div class="line">        ssl_certificate      /usr/<span class="built_in">local</span>/etc/nginx/ssl/1_blog.generate-favicon.com_bundle.crt; <span class="comment">#crt文件的目录</span></div><div class="line">        ssl_certificate_key /usr/<span class="built_in">local</span>/etc/nginx/ssl/generate-favicon_de.key;   <span class="comment"># key 文件的目录</span></div><div class="line">                                                                                     </div><div class="line">        ssl_session_cache    shared:SSL:1m;                                          </div><div class="line">        ssl_session_timeout  5m;                                                     </div><div class="line">                                                                                     </div><div class="line">        ssl_ciphers  HIGH:!aNULL:!MD5;                                               </div><div class="line">        ssl_prefer_server_ciphers  on;                                               </div><div class="line">        <span class="comment"># 和你网站server里的配置一样</span></div><div class="line">        <span class="built_in">return</span> 301 https://domain.com<span class="variable">$request_uri</span>; <span class="comment"># 指向的你网站，这样无论访问http,https都会到https</span></div><div class="line">        location / &#123;                                                                 </div><div class="line">            root   html;                                                             </div><div class="line">            index  index.html index.htm;                                             </div><div class="line">        &#125;                                                                            </div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="SSL等级检测"><a href="#SSL等级检测" class="headerlink" title="SSL等级检测"></a>SSL等级检测</h4><h5 id="访问https-www-ssllabs-com-ssltest-填写域名点击提交大概两分钟左右，输出如下信息"><a href="#访问https-www-ssllabs-com-ssltest-填写域名点击提交大概两分钟左右，输出如下信息" class="headerlink" title="访问https://www.ssllabs.com/ssltest/ ,填写域名点击提交大概两分钟左右，输出如下信息"></a>访问<a href="https://www.ssllabs.com/ssltest/" target="_blank" rel="external">https://www.ssllabs.com/ssltest/</a> ,填写域名点击提交大概两分钟左右，输出如下信息</h5><p><img src="http://ong8z3v18.bkt.clouddn.com/summary.png" alt="summary"></p>
+<blockquote>
+<p>等级是B，有的是C，可以看看对应等级所欠缺的</p>
+</blockquote>
+<h5 id="提高SSL等级"><a href="#提高SSL等级" class="headerlink" title="提高SSL等级"></a>提高SSL等级</h5><ul>
+<li><p>GitHub 上有一个开源项目<a href="https://github.com/lijianhua/server-configs-nginx" target="_blank" rel="external">server-configs-nginx</a> 地址是我fork的项目，server-configs-nginx/h5bp/directive-only/ssl.conf 的文件 复制这三行到你的配置内；在测试应该可以达到A</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ssl_protocols TLSv1 TLSv1.1 TLSv1.2; <span class="comment"># 第三行</span></div><div class="line">ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:ECDHE-RSA-DES-CBC3-SHA:ECDHE-ECDSA-DES-CBC3-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:CAMELLIA:DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA;</div><div class="line">ssl_prefer_server_ciphers  on;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Github上一个开源的项目<a href="https://mozilla.github.io/server-side-tls/ssl-config-generator/" target="_blank" rel="external">mozilla/server-side-tls </a> 会基于不同服务器版本生成不同增强型 SSL 配置；并且加入 HSTS 特性支持.</p>
+<blockquote>
+<p>HSTS的作用是强制客户端（如浏览器）使用HTTPS与服务器创建连接。</p>
+</blockquote>
+</li>
+</ul>
+<p>（完）</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://ljh.name/2017/03/28/composer整合github实现自动推送项目到packagist-org/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1457,7 +1678,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1479,7 +1700,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

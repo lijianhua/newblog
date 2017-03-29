@@ -1,0 +1,983 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="SSL,HTTPS,Startssl," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="空" type="application/atom+xml" />
+
+
+
+<meta name="google-site-verification" content="9EvSqFml9CFBYD8KCzUF3avY1sjQcsnf3v7VTEAgpts" />
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+  <link rel="apple-touch-icon" sizes="57x57" href="/image/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/image/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/image/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/image/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/image/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/image/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/image/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/image/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/image/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/image/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/image/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/image/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/image/favicon-16x16.png">
+  <link rel="manifest" href="/image/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/image/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+
+
+
+
+
+<meta name="description" content="什么是SSL？SSL(Secure Sockets Layer 安全套接层),及其继任者传输层安全（Transport Layer Security，TLS）是为网络通信提供安全及数据完整性的一种安全协议。TLS与SSL在传输层对网络连接进行加密。
+为什么使用SSL?机密性：SSL协议使用密钥加密通信数据。
+可靠性：服务器和客户都会被认证，客户的认证是可选的。
+完整性：SSL协议会对传送的数据进行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何配置SSL证书">
+<meta property="og:url" content="http://ljh.name/2017/03/29/如何配置SSL/index.html">
+<meta property="og:site_name" content="空">
+<meta property="og:description" content="什么是SSL？SSL(Secure Sockets Layer 安全套接层),及其继任者传输层安全（Transport Layer Security，TLS）是为网络通信提供安全及数据完整性的一种安全协议。TLS与SSL在传输层对网络连接进行加密。
+为什么使用SSL?机密性：SSL协议使用密钥加密通信数据。
+可靠性：服务器和客户都会被认证，客户的认证是可选的。
+完整性：SSL协议会对传送的数据进行">
+<meta property="og:image" content="http://ong8z3v18.bkt.clouddn.com/validations.png">
+<meta property="og:image" content="http://ong8z3v18.bkt.clouddn.com/validationmail.png">
+<meta property="og:image" content="http://ong8z3v18.bkt.clouddn.com/validation-success.png">
+<meta property="og:image" content="http://ong8z3v18.bkt.clouddn.com/certificates.png">
+<meta property="og:image" content="http://ong8z3v18.bkt.clouddn.com/csr.png">
+<meta property="og:image" content="http://ong8z3v18.bkt.clouddn.com/download-csr.png">
+<meta property="og:image" content="http://ong8z3v18.bkt.clouddn.com/blog-server.png">
+<meta property="og:image" content="http://ong8z3v18.bkt.clouddn.com/csrblog.png">
+<meta property="og:image" content="http://ong8z3v18.bkt.clouddn.com/decrypt.png">
+<meta property="og:image" content="http://ong8z3v18.bkt.clouddn.com/summary.png">
+<meta property="og:updated_time" content="2017-03-29T05:49:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何配置SSL证书">
+<meta name="twitter:description" content="什么是SSL？SSL(Secure Sockets Layer 安全套接层),及其继任者传输层安全（Transport Layer Security，TLS）是为网络通信提供安全及数据完整性的一种安全协议。TLS与SSL在传输层对网络连接进行加密。
+为什么使用SSL?机密性：SSL协议使用密钥加密通信数据。
+可靠性：服务器和客户都会被认证，客户的认证是可选的。
+完整性：SSL协议会对传送的数据进行">
+<meta name="twitter:image" content="http://ong8z3v18.bkt.clouddn.com/validations.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://ljh.name/2017/03/29/如何配置SSL/"/>
+
+
+
+
+
+  <title> 如何配置SSL证书 | 空 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">空</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://ljh.name/2017/03/29/如何配置SSL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Li Jianhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://secure.gravatar.com/avatar/7992114d3fb9bebb3271d4cf53829c0c?s=64">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="空">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                如何配置SSL证书
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-29T09:31:21+08:00">
+                2017-03-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术学习/" itemprop="url" rel="index">
+                    <span itemprop="name">技术学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2017/03/29/如何配置SSL/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/03/29/如何配置SSL/" class="leancloud_visitors" data-flag-title="如何配置SSL证书">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="什么是SSL？"><a href="#什么是SSL？" class="headerlink" title="什么是SSL？"></a>什么是SSL？</h4><p><a href="http://baike.baidu.com/link?url=dQo5hplNvTsfm_Lcwq_1bHVmReQAsYM5uTxWLm2fx2zGKdcymmnO0uZjXED2vGao9qzo_jgWT7AOlF1qcKjiOa" target="_blank" rel="external">SSL</a>(Secure Sockets Layer <a href="http://baike.baidu.com/item/%E5%AE%89%E5%85%A8%E5%A5%97%E6%8E%A5%E5%B1%82" target="_blank" rel="external">安全套接层</a>),及其继任者<a href="http://baike.baidu.com/item/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8" target="_blank" rel="external">传输层安全</a>（Transport Layer Security，TLS）是为<a href="http://baike.baidu.com/item/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1" target="_blank" rel="external">网络通信</a>提供安全及<a href="http://baike.baidu.com/item/%E6%95%B0%E6%8D%AE%E5%AE%8C%E6%95%B4%E6%80%A7" target="_blank" rel="external">数据完整性</a>的一种安全协议。TLS与SSL在<a href="http://baike.baidu.com/item/%E4%BC%A0%E8%BE%93%E5%B1%82" target="_blank" rel="external">传输层</a>对网络连接进行加密。</p>
+<h4 id="为什么使用SSL"><a href="#为什么使用SSL" class="headerlink" title="为什么使用SSL?"></a>为什么使用SSL?</h4><p>机密性：SSL协议使用密钥加密通信数据。</p>
+<p>可靠性：服务器和客户都会被认证，客户的认证是可选的。</p>
+<p>完整性：SSL协议会对传送的数据进行完整性检查。</p>
+<h4 id="在哪申请SSL证书"><a href="#在哪申请SSL证书" class="headerlink" title="在哪申请SSL证书?"></a>在哪申请SSL证书?</h4><p><a href="https://www.startssl.com/" target="_blank" rel="external">Startssl免费证书</a> 推荐</p>
+<p><a href="https://letsencrypt.org/" target="_blank" rel="external">Letsencrypt证书</a> 推荐</p>
+<p><a href="https://freessl.wosign.com/" target="_blank" rel="external">Wosign免费证书</a></p>
+<h4 id="在Startssl-上申请-SSL证书"><a href="#在Startssl-上申请-SSL证书" class="headerlink" title="在Startssl 上申请 SSL证书"></a>在Startssl 上申请 SSL证书</h4><ul>
+<li><p>首先登陆到startssl并注册，两种登陆方式：证书登陆，需要你安装证书，还有一种就是发送密码到你的注册邮箱</p>
+</li>
+<li><p>登陆成功后会跳到如下页面，首先验证域名证明域名归你所有,点击</p>
+<p>Validations  Wizard填写域名并提交</p>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/validations.png" alt="validations"></p>
+</li>
+<li><p>进入域名所有者信息验证页，选择你的邮箱会发送一个验证码到你的邮箱，填写验证码提交，注册成功</p>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/validationmail.png" alt="validationsmail"></p>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/validation-success.png" alt="success"></p>
+<blockquote>
+<p>可能有的人找不到自己的邮箱，这是你开启了域名隐私保护，去域名管理的地方关闭一下，重新提交就找到你的邮箱了</p>
+</blockquote>
+</li>
+<li><p>点击Certificates Wizard,填写你的域名，子域名等，最多可以添加5个</p>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/certificates.png" alt="cerwiz"></p>
+</li>
+<li><p>填写域名后，下面需要生成CSR文件并且填入提交</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">$ openssl req -newkey rsa:2048 -keyout generate-favicon.key -out generate-favicon.csr <span class="comment"># 复制命令</span></div><div class="line">Generating a 2048 bit RSA private key</div><div class="line">................................................................................................................................................+++</div><div class="line">........................................+++</div><div class="line">writing new private key to <span class="string">'generate-favicon.key'</span></div><div class="line">Enter PEM pass phrase:   <span class="comment">#  解密需要的密码</span></div><div class="line">Verifying - Enter PEM pass phrase:</div><div class="line">-----</div><div class="line">You are about to be asked to enter information that will be incorporated</div><div class="line">into your certificate request.</div><div class="line">What you are about to enter is what is called a Distinguished Name or a DN.</div><div class="line">There are quite a few fields but you can leave some blank</div><div class="line">For some fields there will be a default value,</div><div class="line">If you enter <span class="string">'.'</span>, the field will be left blank.</div><div class="line">-----</div><div class="line">Country Name (2 letter code) [AU]:CN</div><div class="line">State or Province Name (full name) [Some-State]:Gubler</div><div class="line">Locality Name (eg, city) []:BJ</div><div class="line">Organization Name (eg, company) [Internet Widgits Pty Ltd]:</div><div class="line">Organizational Unit Name (eg, section) []:</div><div class="line">Common Name (e.g. server FQDN or YOUR name) []:gubler <span class="comment"># 提交人姓名</span></div><div class="line">Email Address []:lijianhua_oop@163.com <span class="comment">#提交人的邮箱</span></div><div class="line"></div><div class="line">Please enter the following <span class="string">'extra'</span> attributes</div><div class="line">to be sent with your certificate request</div><div class="line">A challenge password []:gubler </div><div class="line">An optional company name []:gubler</div><div class="line">$ ls</div><div class="line">generate-favicon.csr generate-favicon.key</div><div class="line">$ cat generate-favicon.csr <span class="comment"># 复制cat出来的内容，粘贴到SSL网站并且提交</span></div></pre></td></tr></table></figure>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/csr.png" alt="csr"></p>
+</li>
+<li><p>提交成功后在返回的页面点击选中地方，下载一个文件</p>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/download-csr.png" alt="download"></p>
+</li>
+<li><p>文件是各种服务器需要的crt证书，我选择的是Nginx证书，解压后的文件用SCP发送到服务器</p>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/blog-server.png" alt="server"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ scp 1_blog.generate-favicon.com_bundle.crt root@111.111.111.111:/</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="在Nginx配置SSL-证书"><a href="#在Nginx配置SSL-证书" class="headerlink" title="在Nginx配置SSL 证书"></a>在Nginx配置SSL 证书</h4><ul>
+<li><p>配置SSL证书需要两个文件一个是解压赌赢服务器文件所得的证书，例如：选择的NginxServer.zip解压缩的文件</p>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/csrblog.png" alt="csrblog"></p>
+</li>
+<li><p>另一个文件是解密我们生成的key文件所得的内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cat generate-favicon.key <span class="comment"># 复制cat出的数据到startssl</span></div></pre></td></tr></table></figure>
+<p><img src="http://ong8z3v18.bkt.clouddn.com/decrypt.png" alt="decrypt"></p>
+<blockquote>
+<p>点击Tool  Box 选择Decrypt Private Key 复制cat出的数据到 Private key,</p>
+<p>Passphrase 输入之前生成文件时候设置的PEM pass phrase，点击Decrypt 复制解密的内容 粘贴到后缀名为.key的文件</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ vim  generate-favicon_de.key <span class="comment"># 复制内容到这个文件，这就是配置所需要的第二个文件</span></div><div class="line">$ scp  generate-favicon_de.key root@111.111.111.111:/ <span class="comment"># 上传到服务器</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>配置nginx </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">$ mv generate-favicon_de.key  1_blog.generate-favicon.com_bundle.crt /usr/<span class="built_in">local</span>/etc/nginx/ssl <span class="comment"># 移动两个文件到新建的SSL目录 不是必须的 我是为了方便找</span></div><div class="line">$ vim /usr/<span class="built_in">local</span>/etc/nginx/nginx.conf <span class="comment"># 打开默认配置文件，也可以是你网站所在的配置文件</span></div><div class="line"><span class="comment"># 去掉注释</span></div><div class="line"> server &#123;                                                                                                                                                </div><div class="line">        listen       443 ssl;                                                        </div><div class="line">        server_name  localhost; <span class="comment"># 你网站的域名         </span></div><div class="line">                                                                                     </div><div class="line">        ssl_certificate      /usr/<span class="built_in">local</span>/etc/nginx/ssl/1_blog.generate-favicon.com_bundle.crt; <span class="comment">#crt文件的目录</span></div><div class="line">        ssl_certificate_key /usr/<span class="built_in">local</span>/etc/nginx/ssl/generate-favicon_de.key;   <span class="comment"># key 文件的目录</span></div><div class="line">                                                                                     </div><div class="line">        ssl_session_cache    shared:SSL:1m;                                          </div><div class="line">        ssl_session_timeout  5m;                                                     </div><div class="line">                                                                                     </div><div class="line">        ssl_ciphers  HIGH:!aNULL:!MD5;                                               </div><div class="line">        ssl_prefer_server_ciphers  on;                                               </div><div class="line">        <span class="comment"># 和你网站server里的配置一样</span></div><div class="line">        <span class="built_in">return</span> 301 https://domain.com<span class="variable">$request_uri</span>; <span class="comment"># 指向的你网站，这样无论访问http,https都会到https</span></div><div class="line">        location / &#123;                                                                 </div><div class="line">            root   html;                                                             </div><div class="line">            index  index.html index.htm;                                             </div><div class="line">        &#125;                                                                            </div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="SSL等级检测"><a href="#SSL等级检测" class="headerlink" title="SSL等级检测"></a>SSL等级检测</h4><h5 id="访问https-www-ssllabs-com-ssltest-填写域名点击提交大概两分钟左右，输出如下信息"><a href="#访问https-www-ssllabs-com-ssltest-填写域名点击提交大概两分钟左右，输出如下信息" class="headerlink" title="访问https://www.ssllabs.com/ssltest/ ,填写域名点击提交大概两分钟左右，输出如下信息"></a>访问<a href="https://www.ssllabs.com/ssltest/" target="_blank" rel="external">https://www.ssllabs.com/ssltest/</a> ,填写域名点击提交大概两分钟左右，输出如下信息</h5><p><img src="http://ong8z3v18.bkt.clouddn.com/summary.png" alt="summary"></p>
+<blockquote>
+<p>等级是B，有的是C，可以看看对应等级所欠缺的</p>
+</blockquote>
+<h5 id="提高SSL等级"><a href="#提高SSL等级" class="headerlink" title="提高SSL等级"></a>提高SSL等级</h5><ul>
+<li><p>GitHub 上有一个开源项目<a href="https://github.com/lijianhua/server-configs-nginx" target="_blank" rel="external">server-configs-nginx</a> 地址是我fork的项目，server-configs-nginx/h5bp/directive-only/ssl.conf 的文件 复制这三行到你的配置内；在测试应该可以达到A</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ssl_protocols TLSv1 TLSv1.1 TLSv1.2; <span class="comment"># 第三行</span></div><div class="line">ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:ECDHE-RSA-DES-CBC3-SHA:ECDHE-ECDSA-DES-CBC3-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:CAMELLIA:DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA;</div><div class="line">ssl_prefer_server_ciphers  on;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Github上一个开源的项目<a href="https://mozilla.github.io/server-side-tls/ssl-config-generator/" target="_blank" rel="external">mozilla/server-side-tls </a> 会基于不同服务器版本生成不同增强型 SSL 配置；并且加入 HSTS 特性支持.</p>
+<blockquote>
+<p>HSTS的作用是强制客户端（如浏览器）使用HTTPS与服务器创建连接。</p>
+</blockquote>
+</li>
+</ul>
+<p>（完）</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SSL/" rel="tag"># SSL</a>
+          
+            <a href="/tags/HTTPS/" rel="tag"># HTTPS</a>
+          
+            <a href="/tags/Startssl/" rel="tag"># Startssl</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/28/composer整合github实现自动推送项目到packagist-org/" rel="next" title="composer整合github实现自动推送项目到packagist.org">
+                <i class="fa fa-chevron-left"></i> composer整合github实现自动推送项目到packagist.org
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://secure.gravatar.com/avatar/7992114d3fb9bebb3271d4cf53829c0c?s=64"
+               alt="Li Jianhua" />
+          <p class="site-author-name" itemprop="name">Li Jianhua</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/lijianhua" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+          <a href="Mailto:lijianhua_oop@163.com"><i class="fa fa-fw fa-envelope-o"></i>Email</a>
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是SSL？"><span class="nav-number">1.</span> <span class="nav-text">什么是SSL？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么使用SSL"><span class="nav-number">2.</span> <span class="nav-text">为什么使用SSL?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在哪申请SSL证书"><span class="nav-number">3.</span> <span class="nav-text">在哪申请SSL证书?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在Startssl-上申请-SSL证书"><span class="nav-number">4.</span> <span class="nav-text">在Startssl 上申请 SSL证书</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在Nginx配置SSL-证书"><span class="nav-number">5.</span> <span class="nav-text">在Nginx配置SSL 证书</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SSL等级检测"><span class="nav-number">6.</span> <span class="nav-text">SSL等级检测</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#访问https-www-ssllabs-com-ssltest-填写域名点击提交大概两分钟左右，输出如下信息"><span class="nav-number">6.1.</span> <span class="nav-text">访问https://www.ssllabs.com/ssltest/ ,填写域名点击提交大概两分钟左右，输出如下信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#提高SSL等级"><span class="nav-number">6.2.</span> <span class="nav-text">提高SSL等级</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Li Jianhua</span>
+<i class="fa fa-snowflake-o" aria-hidden="true"></i>
+<a href="http://www.miitbeian.gov.cn/">黑ICP备15002574号</a>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "f616a6897ae34b2cb6268d7ed232a2c3",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("FyKqp1B2nTTuaAilfn5onXYx-gzGzoHsz", "wsk4RjWPraU2ATB9PVdo9XoY");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
