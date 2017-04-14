@@ -125,7 +125,7 @@ ELK由ElasticSearch、Logstash和Kiabana三个开源工具组成，作用是集�
 <meta property="og:image" content="http://ong8z3v18.bkt.clouddn.com/es-head-3.png">
 <meta property="og:image" content="http://ong8z3v18.bkt.clouddn.com/kibana.png">
 <meta property="og:image" content="http://ong8z3v18.bkt.clouddn.com/kibana-discover.png">
-<meta property="og:updated_time" content="2017-03-27T01:35:10.000Z">
+<meta property="og:updated_time" content="2017-04-14T06:32:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="开源实时日志分析ELK平台实践">
 <meta name="twitter:description" content="周末参加活动看见别人分享的MONOLOG优化及打造ELK友好的日志格式 ，会后了解了下ELK，看见网上最新的资料比较少，大多是过去的版本，不同版本的配置有些许区别，所以花了一点时间学习了下，记录下来分享一下，希望对你有用，话不多说，下面开始。
@@ -517,8 +517,8 @@ ELK由ElasticSearch、Logstash和Kiabana三个开源工具组成，作用是集�
 <p>这里可能遇见问题 “集群健康值: 未连接”</p>
 <p>修改elasticsearch.yml文件</p>
 <p><code># 增加如下字段</code></p>
-<p><code>http.cors.enabled: ``true</code></p>
-<p><code>http.cors.allow-origin: ``&quot;*&quot;</code></p>
+<p><code>http.cors.enabled: true</code></p>
+<p><code>http.cors.allow-origin: &quot;*&quot;</code></p>
 <p>重启ES和HEAD就可以了</p>
 </blockquote>
 <p><img src="http://ong8z3v18.bkt.clouddn.com/es-head-1.png" alt="es-head-1"></p>
@@ -719,7 +719,7 @@ ELK由ElasticSearch、Logstash和Kiabana三个开源工具组成，作用是集�
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -741,7 +741,7 @@ ELK由ElasticSearch、Logstash和Kiabana三个开源工具组成，作用是集�
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Docker," />
+  <meta name="keywords" content="Docker,Linux,Windowns,Max OS," />
 
 
 
@@ -107,34 +107,13 @@
 
 
 
-<meta name="description" content="起因想要学习是我写这篇博文的原因，虽然我暂时在开发中用不到Docker，但是为了开阔视野我想也应该了解下，学习是没有坏处的
-概念Docker解释有很多，这里我就不照搬了，否则我的这篇博文都是介绍了，大概解释是：Docker 使用的Google的go语言开发实现，现在是开源的，主要代码是Github 上进行维护，是操作系统层面的虚拟化技术 。
-为什么用Docker
-多数优点都是对应虚拟机而言
-
-
-更">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Docker——初探">
-<meta property="og:url" content="http://ljh.name/2017/03/24/Docker——初探/index.html">
+<meta property="og:title" content="Docker——安装">
+<meta property="og:url" content="http://ljh.name/2017/03/30/Docker——安装/index.html">
 <meta property="og:site_name" content="空文件">
-<meta property="og:description" content="起因想要学习是我写这篇博文的原因，虽然我暂时在开发中用不到Docker，但是为了开阔视野我想也应该了解下，学习是没有坏处的
-概念Docker解释有很多，这里我就不照搬了，否则我的这篇博文都是介绍了，大概解释是：Docker 使用的Google的go语言开发实现，现在是开源的，主要代码是Github 上进行维护，是操作系统层面的虚拟化技术 。
-为什么用Docker
-多数优点都是对应虚拟机而言
-
-
-更">
-<meta property="og:updated_time" content="2017-03-24T07:07:41.000Z">
+<meta property="og:updated_time" content="2017-03-30T01:40:09.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Docker——初探">
-<meta name="twitter:description" content="起因想要学习是我写这篇博文的原因，虽然我暂时在开发中用不到Docker，但是为了开阔视野我想也应该了解下，学习是没有坏处的
-概念Docker解释有很多，这里我就不照搬了，否则我的这篇博文都是介绍了，大概解释是：Docker 使用的Google的go语言开发实现，现在是开源的，主要代码是Github 上进行维护，是操作系统层面的虚拟化技术 。
-为什么用Docker
-多数优点都是对应虚拟机而言
-
-
-更">
+<meta name="twitter:title" content="Docker——安装">
 
 
 
@@ -162,13 +141,13 @@
 
 
 
-  <link rel="canonical" href="http://ljh.name/2017/03/24/Docker——初探/"/>
+  <link rel="canonical" href="http://ljh.name/2017/03/30/Docker——安装/"/>
 
 
 
 
 
-  <title> Docker——初探 | 空文件 </title>
+  <title> Docker——安装 | 空文件 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -307,7 +286,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://ljh.name/2017/03/24/Docker——初探/">
+    <link itemprop="mainEntityOfPage" href="http://ljh.name/2017/03/30/Docker——安装/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Li Jianhua">
@@ -328,7 +307,7 @@
             
             
               
-                Docker——初探
+                Docker——安装
               
             
           </h1>
@@ -343,8 +322,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-24T14:13:45+08:00">
-                2017-03-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-30T09:35:34+08:00">
+                2017-03-30
               </time>
             
 
@@ -384,7 +363,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a class="cloud-tie-join-count" href="/2017/03/24/Docker——初探/#comments" itemprop="discussionUrl">
+                <a class="cloud-tie-join-count" href="/2017/03/30/Docker——安装/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
@@ -393,7 +372,7 @@
 
           
           
-             <span id="/2017/03/24/Docker——初探/" class="leancloud_visitors" data-flag-title="Docker——初探">
+             <span id="/2017/03/30/Docker——安装/" class="leancloud_visitors" data-flag-title="Docker——安装">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -422,53 +401,7 @@
       
 
       
-        <h4 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h4><p>想要学习是我写这篇博文的原因，虽然我暂时在开发中用不到Docker，但是为了开阔视野我想也应该了解下，学习是没有坏处的</p>
-<h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p><a href="https://yeasy.gitbooks.io/docker_practice/introduction/what.html" target="_blank" rel="external">Docker</a>解释有很多，这里我就不照搬了，否则我的这篇博文都是介绍了，大概解释是：Docker 使用的Google的go语言开发实现，现在是开源的，主要代码是<a href="https://github.com/docker/docker" target="_blank" rel="external">Github</a> 上进行维护，是<a href="https://en.wikipedia.org/wiki/Operating-system-level_virtualization" target="_blank" rel="external">操作系统层面的虚拟化技术</a> 。</p>
-<h4 id="为什么用Docker"><a href="#为什么用Docker" class="headerlink" title="为什么用Docker"></a>为什么用Docker</h4><blockquote>
-<p>多数优点都是对应虚拟机而言</p>
-</blockquote>
-<ul>
-<li>更高效的利用系统资源</li>
-<li>更快的启动时间</li>
-<li>一致的运行环境<ul>
-<li>这个我认为最重要，在开发，测试，生产保持环境一致，不会因为系统导致 <em>“这段代码在我机器上没问题啊”</em> 这类问题。</li>
-</ul>
-</li>
-<li>持续交付和部署</li>
-<li>更轻松的迁移<ul>
-<li>Docker 可以在很多平台上运行，无论是物理机、虚拟机、公有云、私有云，甚至是笔记本，其运行结果是一致的。</li>
-</ul>
-</li>
-<li>更轻松的维护和扩展</li>
-</ul>
-<h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><ul>
-<li><p><a href="https://yeasy.gitbooks.io/docker_practice/basic_concept/image.html" target="_blank" rel="external">Docker 镜像</a> (Image)</p>
-<blockquote>
-<p>Docker 镜像是一个特殊的文件系统，是由一组文件系统组成，或者说，由多层文件系统联合组成。镜像构建时，会一层层构建，前一层是后一层的基础。每一层构建完就不会再发生改变，后一层上的任何改变只发生在自己这一层。</p>
-</blockquote>
-</li>
-<li><p><a href="https://yeasy.gitbooks.io/docker_practice/basic_concept/container.html" target="_blank" rel="external">Docker 容器</a> (Container)</p>
-<blockquote>
-<p>镜像（Image）和容器（Container）的关系，就像是面向对象程序设计中的<code>类</code>和<code>实例</code>一样，镜像是静态的定义，容器是镜像运行时的实体。容器可以被创建、启动、停止、删除、暂停等。</p>
-</blockquote>
-</li>
-<li><p><a href="https://yeasy.gitbooks.io/docker_practice/basic_concept/repository.html" target="_blank" rel="external">Docker 仓库</a> (Registry)</p>
-<blockquote>
-<p>镜像构建完成后，可以很容易的在当前宿主上运行，但是，如果需要在其它服务器上使用这个镜像，我们就需要一个集中的存储、分发镜像的服务，<a href="https://docs.docker.com/registry/" target="_blank" rel="external">Docker Registry</a> 就是这样的服务。</p>
-<blockquote>
-<p>我的理解是Docker Registry 就是一个Github，每个软件或者系统就是一个项目，项目有标签就是每个软件的版本。当然这里的Registry 也有公开服务和私有服务。</p>
-</blockquote>
-</blockquote>
-</li>
-</ul>
-<ul>
-<li>参考文章：<ul>
-<li><a href="https://www.gitbook.com/book/yeasy/docker_practice" target="_blank" rel="external">Docker 从入门到实践</a> </li>
-<li><a href="http://www.infoq.com/cn/articles/docker-container-management-libcontainer-depth-analysis" target="_blank" rel="external">Docker背后的容器管理——Libcontainer深度解析</a>  这个可以加深了解容器是什么。</li>
-</ul>
-</li>
-</ul>
-
+        
       
     </div>
 
@@ -515,6 +448,12 @@
           
             <a href="/tags/Docker/" rel="tag"># Docker</a>
           
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+            <a href="/tags/Windowns/" rel="tag"># Windowns</a>
+          
+            <a href="/tags/Max-OS/" rel="tag"># Max OS</a>
+          
         </div>
       
 
@@ -526,8 +465,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/23/Nginx反向代理和负载均衡/" rel="next" title="Nginx反向代理和负载均衡">
-                <i class="fa fa-chevron-left"></i> Nginx反向代理和负载均衡
+              <a href="/2017/03/29/如何配置SSL/" rel="next" title="如何配置SSL证书">
+                <i class="fa fa-chevron-left"></i> 如何配置SSL证书
               </a>
             
           </div>
@@ -535,10 +474,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/26/开源实时日志分析ELK平台实践/" rel="prev" title="开源实时日志分析ELK平台实践">
-                开源实时日志分析ELK平台实践 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -587,17 +522,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https://secure.gravatar.com/avatar/7992114d3fb9bebb3271d4cf53829c0c?s=64"
@@ -678,22 +604,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#起因"><span class="nav-number">1.</span> <span class="nav-text">起因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#概念"><span class="nav-number">2.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么用Docker"><span class="nav-number">3.</span> <span class="nav-text">为什么用Docker</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基本概念"><span class="nav-number">4.</span> <span class="nav-text">基本概念</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

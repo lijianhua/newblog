@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ljh.name/"/>
-  <updated>2017-03-29T05:49:04.000Z</updated>
+  <updated>2017-03-30T01:40:09.000Z</updated>
   <id>http://ljh.name/</id>
   
   <author>
@@ -14,6 +14,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Docker——安装</title>
+    <link href="http://ljh.name/2017/03/30/Docker%E2%80%94%E2%80%94%E5%AE%89%E8%A3%85/"/>
+    <id>http://ljh.name/2017/03/30/Docker——安装/</id>
+    <published>2017-03-30T01:35:34.000Z</published>
+    <updated>2017-03-30T01:40:09.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="Docker" scheme="http://ljh.name/categories/Docker/"/>
+    
+    
+      <category term="Docker" scheme="http://ljh.name/tags/Docker/"/>
+    
+      <category term="Linux" scheme="http://ljh.name/tags/Linux/"/>
+    
+      <category term="Windowns" scheme="http://ljh.name/tags/Windowns/"/>
+    
+      <category term="Max OS" scheme="http://ljh.name/tags/Max-OS/"/>
+    
+  </entry>
   
   <entry>
     <title>如何配置SSL证书</title>
@@ -230,7 +254,7 @@
     <link href="http://ljh.name/2017/03/26/%E5%BC%80%E6%BA%90%E5%AE%9E%E6%97%B6%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90ELK%E5%B9%B3%E5%8F%B0%E5%AE%9E%E8%B7%B5/"/>
     <id>http://ljh.name/2017/03/26/开源实时日志分析ELK平台实践/</id>
     <published>2017-03-26T14:14:14.000Z</published>
-    <updated>2017-03-27T01:35:10.000Z</updated>
+    <updated>2017-04-14T06:32:02.000Z</updated>
     
     <content type="html"><![CDATA[<p>周末参加活动看见别人分享的<a href="https://leo108.com/pid-2256.asp" target="_blank" rel="external">MONOLOG优化及打造ELK友好的日志格式</a> ，会后了解了下ELK，看见网上最新的资料比较少，大多是过去的版本，不同版本的配置有些许区别，所以花了一点时间学习了下，记录下来分享一下，希望对你有用，话不多说，下面开始。</p>
 <h4 id="ELK是什么？"><a href="#ELK是什么？" class="headerlink" title="ELK是什么？"></a>ELK是什么？</h4><blockquote>
@@ -330,8 +354,8 @@
 <p>这里可能遇见问题 “集群健康值: 未连接”</p>
 <p>修改elasticsearch.yml文件</p>
 <p><code># 增加如下字段</code></p>
-<p><code>http.cors.enabled: ``true</code></p>
-<p><code>http.cors.allow-origin: ``&quot;*&quot;</code></p>
+<p><code>http.cors.enabled: true</code></p>
+<p><code>http.cors.allow-origin: &quot;*&quot;</code></p>
 <p>重启ES和HEAD就可以了</p>
 </blockquote>
 <p><img src="http://ong8z3v18.bkt.clouddn.com/es-head-1.png" alt="es-head-1"></p>
