@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ljh.name/"/>
-  <updated>2017-04-27T09:10:58.000Z</updated>
+  <updated>2017-04-27T09:12:00.000Z</updated>
   <id>http://ljh.name/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>用&lt;yarn&gt;代替&lt;npm&gt;</title>
-    <link href="http://ljh.name/2017/04/27/%E6%9E%84%E5%BB%BA%E5%89%8D%E7%AB%AF/"/>
-    <id>http://ljh.name/2017/04/27/构建前端/</id>
+    <title>用yarn代替npm</title>
+    <link href="http://ljh.name/2017/04/27/%E7%94%A8yarn%E4%BB%A3%E6%9B%BFnpm/"/>
+    <id>http://ljh.name/2017/04/27/用yarn代替npm/</id>
     <published>2017-04-27T08:37:25.000Z</published>
-    <updated>2017-04-27T09:10:58.000Z</updated>
+    <updated>2017-04-27T09:12:00.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="Yarn"><a href="#Yarn" class="headerlink" title="Yarn"></a>Yarn</h3><blockquote>
 <p>Yarn 是 Facebook发布的 一个新的JavaScript包管理CLI客户端工具，你可以理解它与npm一样</p>
