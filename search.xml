@@ -3,6 +3,13 @@
   
     
     <entry>
+      <title><![CDATA[用代替]]></title>
+      <url>%2F2017%2F04%2F27%2F%E6%9E%84%E5%BB%BA%E5%89%8D%E7%AB%AF%2F</url>
+      <content type="text"><![CDATA[Yarn Yarn 是 Facebook发布的 一个新的JavaScript包管理CLI客户端工具，你可以理解它与npm一样 起因 知道并且使用就在我写这篇文章之前，作为一个PHP程序员我打算开始一个新的laravel项目时，在构建前端时候一次次失败，在搜索遇见的问题时知道了Yarn，抱着试一试的心态我使用了它，结果出奇的顺利，我完成了构建，所以记录下来。 安装使用 如果你安装了npm，那么安装yarn很方便 1$ npm install -g yarn 安装过程中可能会提示你nodejs版本过低，可以选择升级 12$ npm install -g n # node 的 n 模块专门管理node.js版本的$ n stable # 升级到node最新稳定版 下面你可以使用yarn了 12345678$ yarn 或 yarn install # npm install$ yarn add [package] # 在你当前的包里添加一个包来使用$ yarn add [package]@[version]$ yarn add [package]@[tag]$ yarn upgrade [package] # 升级依赖包$ yarn upgrade [package]@[version]$ yarn upgrade [package]@[tag]$ yarn remove [package] # 移除依赖 下面你可以愉快的使用yarn了 参阅yarnpkg]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[Docker——安装]]></title>
       <url>%2F2017%2F03%2F30%2FDocker%E2%80%94%E2%80%94%E5%AE%89%E8%A3%85%2F</url>
       <content type="text"></content>

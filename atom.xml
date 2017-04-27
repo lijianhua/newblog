@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ljh.name/"/>
-  <updated>2017-03-30T01:40:09.000Z</updated>
+  <updated>2017-04-27T09:10:58.000Z</updated>
   <id>http://ljh.name/</id>
   
   <author>
@@ -14,6 +14,53 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>用&lt;yarn&gt;代替&lt;npm&gt;</title>
+    <link href="http://ljh.name/2017/04/27/%E6%9E%84%E5%BB%BA%E5%89%8D%E7%AB%AF/"/>
+    <id>http://ljh.name/2017/04/27/构建前端/</id>
+    <published>2017-04-27T08:37:25.000Z</published>
+    <updated>2017-04-27T09:10:58.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Yarn"><a href="#Yarn" class="headerlink" title="Yarn"></a>Yarn</h3><blockquote>
+<p>Yarn 是 Facebook发布的 一个新的JavaScript包管理CLI客户端工具，你可以理解它与npm一样</p>
+</blockquote>
+<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><blockquote>
+<p>知道并且使用就在我写这篇文章之前，作为一个PHP程序员我打算开始一个新的laravel项目时，在构建前端时候一次次失败，在搜索遇见的问题时知道了Yarn，抱着试一试的心态我使用了它，结果出奇的顺利，我完成了构建，所以记录下来。</p>
+</blockquote>
+<h3 id="安装使用"><a href="#安装使用" class="headerlink" title="安装使用"></a>安装使用</h3><blockquote>
+<p>如果你安装了npm，那么安装yarn很方便</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g yarn</div></pre></td></tr></table></figure>
+<blockquote>
+<p>安装过程中可能会提示你nodejs版本过低，可以选择升级</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ npm install -g n <span class="comment"># node 的 n 模块专门管理node.js版本的</span></div><div class="line">$ n stable <span class="comment"># 升级到node最新稳定版</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>下面你可以使用yarn了</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ yarn 或 yarn install <span class="comment"># npm install</span></div><div class="line">$ yarn add [package] <span class="comment"># 在你当前的包里添加一个包来使用</span></div><div class="line">$ yarn add [package]@[version]</div><div class="line">$ yarn add [package]@[tag]</div><div class="line">$ yarn upgrade [package] <span class="comment"># 升级依赖包</span></div><div class="line">$ yarn upgrade [package]@[version]</div><div class="line">$ yarn upgrade [package]@[tag]</div><div class="line">$ yarn remove [package] <span class="comment"># 移除依赖</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>下面你可以愉快的使用yarn了</p>
+</blockquote>
+<h3 id="参阅"><a href="#参阅" class="headerlink" title="参阅"></a>参阅</h3><p><a href="https://yarnpkg.com/zh-Hans/" target="_blank" rel="external">yarnpkg</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;Yarn&quot;&gt;&lt;a href=&quot;#Yarn&quot; class=&quot;headerlink&quot; title=&quot;Yarn&quot;&gt;&lt;/a&gt;Yarn&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;Yarn 是 Facebook发布的 一个新的JavaScript包管理CLI客户端工具，你可以理
+    
+    </summary>
+    
+    
+      <category term="yarn" scheme="http://ljh.name/tags/yarn/"/>
+    
+      <category term="npm" scheme="http://ljh.name/tags/npm/"/>
+    
+      <category term="laravel" scheme="http://ljh.name/tags/laravel/"/>
+    
+  </entry>
   
   <entry>
     <title>Docker——安装</title>
